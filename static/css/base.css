@@ -60,6 +60,10 @@ body {
     border: 1px solid black !important;
 }
 
+.card-top{
+    padding-top: 12rem;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -72,7 +76,7 @@ body {
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
-        position: fixed;
+        position: sticky;
         top: 0;
         right: 0;
         left: 0;

@@ -1,0 +1,114 @@
+﻿[
+  {
+    "pk": 1,
+    "model": "images.category",
+    "fields": {
+      "name": "top_cane_fruit",
+      "display_name": "Top/cane fruit"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "images.category",
+    "fields": {
+      "name": "root_crops",
+      "display_name": "Root crops"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "images.category",
+    "fields": {
+      "name": "livestock",
+      "display_name": "Livestock"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "images.category",
+    "fields": {
+      "name": "protected_crops",
+      "display_name": "Protected crops"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "images.category",
+    "fields": {
+      "name": "vegetables",
+      "display_name": "Vegetables"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "images.category",
+    "fields": {
+      "name": "forage_and_grass",
+      "display_name": "Forage and grass"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "images.category",
+    "fields": {
+      "name": "industrial_crops",
+      "display_name": "Industrial Crops"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "images.category",
+    "fields": {
+      "name": "seeds",
+      "display_name": "Seeds"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "images.category",
+    "fields": {
+      "name": "environmental",
+      "display_name": "Environmental"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "images.category",
+    "fields": {
+      "name": "commercial_flowers",
+      "display_name": "Commercial flowers"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "images.category",
+    "fields": {
+      "name": "misc",
+      "display_name": "Misc"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "images.category",
+    "fields": {
+      "name": "ornamentals",
+      "display_name": "Ornamentals"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "images.category",
+    "fields": {
+      "name": "herbs",
+      "display_name": "Herbs"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "images.category",
+    "fields": {
+      "name": "salads",
+      "display_name": "Salads"
+    }
+  }
+]

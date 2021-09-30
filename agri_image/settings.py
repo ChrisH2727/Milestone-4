@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home',
+    'images',
     # Other Apps that are required
     'crispy_forms',
     'storages',

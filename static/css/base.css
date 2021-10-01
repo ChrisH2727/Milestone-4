@@ -100,3 +100,8 @@ except position made sticky*/
         padding-top: 164px;
     }
 }
+/*-------------------------Image presentation*/
+
+.thumbnail {
+    height: 200px;
+}

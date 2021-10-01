@@ -27,11 +27,11 @@
                         <div class="card h-100 border-0">
                             {% if image.image %}
                             <a href="">
-                                <img class="card-img-top img-fluid" src="{{ image.image.url }}" alt="{{ Image.name }}">
+                                <img class="img-thumbnail" style ="max-width:100%; height:auto;" src="{{ image.image.url }}" alt="{{ Image.name }}">
                             </a>
                             {% else %}
                                 <a href="">
-                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png"
+                                <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png"
                                 alt="{{ image.name }}">
                                 </a>
                             {% endif %}

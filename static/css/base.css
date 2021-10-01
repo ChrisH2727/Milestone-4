@@ -1,3 +1,6 @@
+/* Classes from the Code Institute tutorial video with font family replaced and background 
+image changed */
+
 html {
     height: 100%;
 }
@@ -64,6 +67,15 @@ body {
     padding-top: 12rem;
 }
 
+.overlay {
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: white;
+	z-index: -1;
+}
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -73,7 +85,8 @@ body {
   }
 }
 
-/* fixed top navbar only on medium and up */
+/* fixed top navbar only on medium and up Taken from the Code Institute tutorial 
+except position made sticky*/
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: sticky;

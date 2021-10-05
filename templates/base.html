@@ -28,6 +28,7 @@
   {% endblock %}
 
   {% block corejs %}
+  <script src="https://kit.fontawesome.com/16b2d9be65.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
   </script>
@@ -47,24 +48,25 @@
 
 <body>
   <header class="container-fluid fixed-top">
-    <div class="row">
+    <div class="row bg-white">
       <div class="col-12 col-lg-4 col-md-4 my-auto py-1 py-lg-0 text-center text-lg-left">
         <a href="{% url 'home' %}" class="nav-link main-logo-link">
-          <h2 class="logo-font text-green my-0"><strong>Agri</strong>View</h2>
+          <h2 class="text-green my-0"><strong>Agri</strong>View</h2>
         </a>
       </div>
-      <div class="col-12 col-lg-4 col-md-4 my-auto py-1 py-lg-0">
-        <div class="row bg-white">
-          <nav class="navbar navbar-expand-lg navbar-light w-100">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              {% include 'includes/mobile-nav.html' %}
-              {% include 'includes/wide-nav.html' %}
+      <div class="col-2 col-lg-4 col-md-4 my-auto py-1 py-lg-0">
+        <div class="row">
+          <nav class="navbar navbar-expand-md navbar-light w-100">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
+              aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            {% include 'includes/mobile-nav.html' %}
+            {% include 'includes/wide-nav.html' %}
           </nav>
+        </div>
       </div>
-      </div>
-      <div class="col-12 col-lg-4 col-md-4 my-auto py-1 py-lg-0">
+      <div class="col-10 col-lg-4 col-md-4 my-auto py-1 py-lg-0">
         <ul class="list-inline list-unstyled text-center text-lg-right my-0">
           <li class="list-inline-item dropdown">
             <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
@@ -105,12 +107,12 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 col-lg-12 my-auto py-1 py-lg-0">
+    <div class="row bg-white ">
+      <div class="col-12 col-lg-12 my-auto py-3 py-lg-3">
         <form method="GET" action="">
           <div class="input-group w-100">
             <div class="input-group-prepend">
-              <select class="form-select" aria-label="Select image category">
+              <select class="form-select rounded-left border-black" aria-label="Select image category">
                 <option selected>Category</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -122,7 +124,7 @@
 
 
             <div class="input-group-append">
-              <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+              <button class="form-control btn btn-black border border-black rounded-right" type="submit">
                 <span class="icon">
                   <i class="fas fa-search"></i>
                 </span>
@@ -139,16 +141,7 @@
   <div class="message-container"></div>
   {% endif %}
 
-  <{% block page_header %}
-  {% endblock %}
-
-  {% block content %}
-  {% endblock %}
-
-  {% block postloadjs %}
-  {% endblock %}
-
-
-</body>
+  <{% block page_header %} {% endblock %} {% block content %} {% endblock %} {% block postloadjs %} {% endblock %}
+    </body>
 
 </html>

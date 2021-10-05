@@ -23,7 +23,7 @@ body {
 }
 
 .logo-font {
-    text-transform: uppercase;
+    text-transform: none !important;
 }
 
 .main-logo-link {
@@ -102,6 +102,9 @@ except position made sticky*/
 }
 /*-------------------------Image presentation*/
 
-.thumbnail {
-    height: 200px;
+.thumb_im_adj {
+    object-fit: cover;
+    overflow: hidden;
+    height: 250px; 
+    width : 250px;
 }

@@ -1,1 +1,1 @@
-web: gunicorn agri-image.wsgi:application
+web: gunicorn agri_image.wsgi:application

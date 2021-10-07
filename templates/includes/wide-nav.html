@@ -1,13 +1,21 @@
 <div class="collapse navbar-collapse" id="wide-nav">
-    <ul class="navbar-nav w-auto mx-auto ">
-      <li class="nav-item d-none d-lg-block d-md-none">
-        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+    <ul class="navbar-nav w-auto mx-auto mp-auto ">
+      <li class="nav-item dropdown">
+        
+          <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'images' %}" id="image-selector" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Images
+        </a>
+        <div class="dropdown-menu border-0" aria-labelledby="image-selector">
+          <a href="{% url 'images' %}" class="dropdown-item">Category</a>
+          <a href="{% url 'images' %}" class="dropdown-item ">Collections</a>
+          <a href="{% url 'images' %}" class="dropdown-item ">Dimensions</a>
+      </div
       </li>
-      <li class="nav-item d-none d-lg-block d-md-none">
-        <a class="nav-link" href="{% url 'images' %}">Link</a>
+      <li class="nav-item">
+        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#">Pricing</a>
       </li>
-      <li class="nav-item d-none d-lg-block d-md-none">
-        <a class="nav-link" href="{% url 'images' %}">Pricing</a>
+      <li class="nav-item">
+        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#">Request an Image</a>
       </li>
     </ul>
 </div>

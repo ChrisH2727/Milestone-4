@@ -112,10 +112,12 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if 'DATABASE_URL2' in os.environ:
+    print("remote")
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL2'))
     }
 else:
+    print("local")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -173,11 +175,11 @@ if 'USE_AWS2' in os.environ:
     }
 
     # Bucket Config
-    AWS_STORAGE_BUCKET_NAME = 'ch2727-agri-image'
-    AWS_S3_REGION_NAME = 'eu-west-2'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS2_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS2_SECRET_ACCESS_KEY')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    # AWS_STORAGE_BUCKET_NAME = 'ch2727-agri-image'
+    # AWS_S3_REGION_NAME = 'eu-west-2'
+    # AWS_ACCESS_KEY_ID = os.environ.get('AWS2_ACCESS_KEY_ID')
+    # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS2_SECRET_ACCESS_KEY')
+    # AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     # Static and media files
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'

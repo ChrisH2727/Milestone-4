@@ -7,7 +7,7 @@ from .models import Image
 def all_images(request):
 
     images = Image.objects.all()
-    
+
     context = {
         'images': images,
     }

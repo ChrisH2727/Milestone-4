@@ -6,11 +6,11 @@ from .models import Image
 
 def all_images(request):
 
-    # images = Image.objects.all()
+    images = Image.objects.all()
 
-    # context = {
-    #     'images': images,
-    # }
+    context = {
+         'images': images,
+    }
 
-    return render(request, 'images/images.html')
+    return render(request, 'images/images.html', context)
 

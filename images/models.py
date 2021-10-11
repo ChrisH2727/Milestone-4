@@ -17,8 +17,7 @@ class Category(models.Model):
 
 
 class Image(models.Model):
-    category = models.ForeignKey(
-        'Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, blank=True, null=True)
     name = models.CharField(max_length=254)
     size = models.CharField(max_length=254, blank=True, null=True)

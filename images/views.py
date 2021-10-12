@@ -8,9 +8,12 @@ def all_images(request):
 
     images = Image.objects.all()
 
+
     context = {
          'images': images,
     }
+    for image in images:
+         print(image)
 
     return render(request, 'images/images.html', context)
 

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay">
+    <div class="container-fluid card-top">
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Request an Image</h2>
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 col-lg-10 col-sm-10 col-md-10 offset-1 card w-100">
+                <div class="card-body">
+                    <h5 class="card-title">Send us your request</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Our team are in reqular contact with the farming
+                        community,
+                        suppliers and manufacturers and as keen photographers record and catalogue events.</h6>
+                    <form method="GET" actions="#">
+                        <div class="form-group">
+                            <label for="email-address">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email-address">Email address</label>
+                            <input type="email" class="form-control" id="email-address" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-request">Description of the image you require. </label>
+                            <textarea class="form-control" id="input-request" rows="3"></textarea>
+                        </div>
+                        <div class="form-group form-check">
+                            <div class="row">
+                                {% for category in categories %}
+                                    <div class="col col-lg-3 col-md-4 col-sm-6">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label"
+                                            for="exampleCheck1">{{category.display_name}}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+                    <p class="card-text">Please complete the request form and click submit. We will confirm that your
+                        request has been received and email you when images matching your request are availble.</p>
+                    <div class="row">
+                        <div class="col text-center">
+                            <a href="#" class="btn btn-primary bg-success border border-success">Submit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

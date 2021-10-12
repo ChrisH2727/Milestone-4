@@ -1,19 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
+from django.db.models import Q
+# Allows db queries to be ORed when the default is AND
 from .models import Image
 
-# Create your views here.
-
+# Code template from the Boutique Ado mini project tutorial 
 
 def all_images(request):
 
     images = Image.objects.all()
+    query = None
 
+    if request.GET:
+        if "q" in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(request, "No image requested.")
+                return redirect(reverse("images"))
+
+            queries = Q(name__icontains=query) | Q(
+                dimensions__icontains=query)
+            # Pipe provides OR i makes search case insensitive
+            images = images.filter(queries)
 
     context = {
-         'images': images,
+        'images': images,
+        'search_item': query
     }
-    for image in images:
-         print(image)
 
     return render(request, 'images/images.html', context)
-

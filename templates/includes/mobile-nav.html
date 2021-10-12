@@ -9,8 +9,8 @@
         </a>
 
         <div class="dropdown-menu border-0 w-100 p-3 rounded-left my-0 border-black" aria-labelledby="mobile-search">
-            <form class="form" method="GET" action="">
-                <form method="GET" action="">
+            
+                <form method="GET" action="{% url 'images' %}">
                     <div class="input-group w-100">
                         <input class="form-control border border-black rounded-left" type="text" name="q"
                             placeholder="Search our site">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </form>
-            </form>
+            
         </div>
     </li>
     <li class="list-inline-item dropdown">

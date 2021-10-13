@@ -7,7 +7,7 @@ from images.models import Category
 def image_request(request):
 
     categories = Category.objects.all()
-
+    print (type(categories))
     context = {
         'categories': categories,
     }

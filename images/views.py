@@ -4,7 +4,7 @@ from django.db.models import Q
 # Allows db queries to be ORed when the default is AND
 from .models import Image
 
-# Code template from the Boutique Ado mini project tutorial 
+# Code template from the Boutique Ado mini project tutorial
 
 def all_images(request):
 

@@ -4,8 +4,11 @@
 
 {% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Verify Your E-mail Address" %}</h1>
+{% block prime_content %}
+<!--html code here based on the Code Institute boutique ado tutorials-->
+<hr>
+<h2 class="logo_font mb-4">{% trans "Verify Your E-mail Address" %}</h2>
+<hr>
 
 {% url 'account_email' as email_url %}
 

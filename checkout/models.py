@@ -25,7 +25,7 @@ class Order(models.Model):
     sales_tax_rate = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
-    # Methods from Code Institute Boutique Ado tutorial
+    # From Code Institute Boutique Ado tutorial modified to calculate sales tax
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID

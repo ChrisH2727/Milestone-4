@@ -1,20 +1,34 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.conf import settings
 
-from .forms import OrderForm
+import stripe
+import json
 
 # From Code Institute Boutique Ado tutorial
 def checkout(request):
-    # Don't have a bag yet
-    # bag = request.session.get('bag', {})
-    # if not bag:
-    #    messages.error(request, "There's nothing in your bag at the moment")
-    #    return redirect(reverse('products'))
 
-    # order_form = OrderForm()
-    
-    # context = {
-    #     'order_form': order_form,
-    # }
+    # Set a temporary total to get stripe working
+    total = 0.99
+    stripe_total = round(total*100)
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    return render(request, 'checkout/checkout.html')
+    stripe.api_key = stripe_secret_key
+
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
+
+    context = {
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        'stripe_total': stripe_total,
+    }
+
+    return render(request, 'checkout/checkout.html', context)

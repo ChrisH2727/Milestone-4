@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'images',
     'pricing',
     'mailme',
+    'checkout',
     # Other Apps that are required
     'crispy_forms',
     'storages',
@@ -113,7 +114,7 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if 'DATABASE_URL2' in os.environ:
     print("remote")
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -150,14 +151,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
+
+# Constants
+SALES_TAX_RATE = 20
 
 
 # Static files (CSS, JavaScript, Images)
@@ -195,7 +195,7 @@ if 'USE_AWS' in os.environ:
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
 
-# Stripe
+# Stripe setup
 STRIPE_CURRENCY = 'GBP'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')

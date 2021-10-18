@@ -3,7 +3,7 @@
 <!-- load bag_tools removed-->
 
 {% block extra_css %}
-
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -25,35 +25,52 @@
         </div>
     </div>
 </div>
-<form action="{% url 'checkout' %}" method="POST" id="payment-form">
-    {% csrf_token %}
-    <fieldset class="px-3">
-        <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-        <!-- A Stripe card element will go here -->
-        <div class="mb-3" id="card-element"></div>
+<div class"row">
+<div class = "col col-lg-6">
 
-        <!-- Used to display form errors -->
-        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
 
-        <!-- Pass the client secret to the view so we can get the payment intent id -->
-        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-    </fieldset>
 
-    <div class="submit-button text-left mt-5 mb-2">
-        <button id="submit-button" class="btn btn-black rounded-0">
-            <span class="font-weight-bold">Complete Order</span>
-            <span class="icon">
-                <i class="fas fa-lock"></i>
-            </span>
-        </button>
-        <p class="small text-danger my-0">
-            <span class="icon">
-                <i class="fas fa-exclamation-circle"></i>
-            </span>
-            <span>Your card will be charged <strong>${{ stripe_total }}</strong></span>
-        </p>
+
+
+    
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            {% csrf_token %}
+            <fieldset class="px-3>
+                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                <div class="group">
+                    
+                        <span>Name on the card</span>
+                        <input id="card_name" class="field" placeholder="John Doe" />
+                    
+                </div>
+                    <div class="group">  
+                        <span>card</span>
+                        <div id="card-element" class="field">
+                        </div>
+                    </div>
+                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+
+                <!-- Pass the client secret to the view so we can get the payment intent id-->
+                <input type="hidden" value="{{ client_secret }}" name="client_secret">
+            </fieldset>
+        
+            <div class="submit-button text-left mt-5 mb-2">
+                <button id="submit-button" class="btn btn-black rounded-0">
+                    <span class="font-weight-bold">Complete Order</span>
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </button>
+                <p class="small text-danger my-0">
+                    <span class="icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </span>
+                    <span>Your card will be charged <strong>£{{ stripe_total }}</strong></span>
+                </p>
+            </div>
+        </form>
+</div>    
     </div>
-</form>
 {% endblock %}
 
 <!--Form the Code Institute Boutique Ado tutorial-->

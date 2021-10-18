@@ -20,6 +20,8 @@ var style = {
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
+        lineHeight: '40px',
+        fontWeight: 300,
         '::placeholder': {
             color: '#aab7c4'
         }
@@ -29,7 +31,8 @@ var style = {
         iconColor: '#dc3545'
     }
 };
-var card = elements.create('card', {style: style});
+// Change config to hide post/zip code. Not a European feature 
+var card = elements.create('card', {hidePostalCode: true,  style: style});
 card.mount('#card-element');
 
 // Handle realtime validation errors on the card element

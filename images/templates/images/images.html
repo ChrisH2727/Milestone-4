@@ -29,21 +29,23 @@
                 {% for image in images %}
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-0">
-                        {% if image.image %}
+                        <form class="form" action="{% url 'carousel' image.id %}" method="POST">
+                        {% csrf_token %} 
+                        {% if image.image %}                
                             <img class="img-thumbnail thumb_im_adj" src="{{ image.image.url }}" alt="{{ image.name }}">
                             <div class="card-img-overlay">
-                                <a href="{% url 'carousel' image.id %} "><i class="fas fa-heart fa-lg image-btn"></i></a>
+                                <button type="submit" class="image-btn"><i class="fas fa-heart fa-lg "></i></button>                        
                             </div>
                             <p class="card-img-bottom">{{ image.name }}</p>
                             <p class="card-img-bottom">{{ image.id }}</p>
                         {% else %}
-                        <a href="">
                             <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png"
                                 alt="{{ image.name }}">
-                        </a>
                         {% endif %}
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">   
+                        </form>    
                     </div>
-                </div>
+                </div>    
                 {% endfor %}
             </div>
         </div>

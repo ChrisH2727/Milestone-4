@@ -24,22 +24,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-            {% if image.image %}
-            <a href="{{ image.image.url }}">
-                <img src="{{ image.image.url }}" alt="{{ image.name }}">
-                <div class="card-img-overlay">
-                    <a href=" "><i class="fas fa-shopping-bag fa-lg image-btn"></i></a>
-                    <a href=" "><i class="fas fa-heart fa-lg image-btn"></i></a>
-                </div>
-                <p class="card-img-bottom">{{ image.name }}</p>
-            </a>
-            {% else %}
-            <a href="">
-                <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png" alt="{{ image.name }}">
-            </a>
-            {% endif %}
-        </div>
+        {% for image in images %}
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                {% if image.image %}
+                    <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                    <div class="card-img-overlay">
+                        <a href=" "><i class="fas fa-shopping-bag fa-lg image-btn"></i></a>
+                        <a href=" "><i class="fas fa-heart fa-lg image-btn"></i></a>
+                    </div>
+                    <p class="card-img-bottom">{{ image.name }}</p>
+        
+                {% else %}
+                    <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png" alt="{{ image.name }}">
+                {% endif %}
+            </div>
+        {% endfor %}    
     </div>
 </div>
 

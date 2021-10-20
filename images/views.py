@@ -6,8 +6,8 @@ from .models import Image
 
 # Code template from the Boutique Ado mini project tutorial
 
+
 def all_images(request):
-    print("all images")
 
     images = Image.objects.all()
     query = None
@@ -34,12 +34,27 @@ def all_images(request):
 
 def carousel(request, image_id):
     """
-    Expand the image to take up the whole screen and
-    allow the user further images in a carousel
+    Collects images ids for display in the carousel
     """
 
-    image = get_object_or_404(Image, pk=image_id)
+    images = request.session.get('images', {})
+    images[image_id] = image_id
+    request.session['images'] = images
+
     redirect_url = request.POST.get('redirect_url')
-    print(image_id)
-    
+    print(request.session['images'])
+
     return redirect(redirect_url)
+
+def carousel_run(request):
+    """
+    Runs the image carousel
+    """
+
+    images = Image.objects.all()
+
+    context = {
+        'images': images,
+    } 
+
+    return render(request, 'images/carousel.html', context)

@@ -89,7 +89,7 @@ TEMPLATES = [
 
                 # required to keep list of images for display by the image
                 # carousel
-                'images.context.carousel_contents',
+                'images.contexts.carousel_contents',
 
                 # required to store the subscription that the customer has
                 # selected for purchase keep for later

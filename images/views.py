@@ -45,19 +45,23 @@ def carousel(request, image_id):
 
     return redirect(redirect_url)
 
+
 def carousel_run(request):
     """
-    Runs the image carousel
+    Find the selected images and runs the image carousel
     """
 
     images_dict = request.session['images']
     images_list = dict.values(images_dict)
-    print(images_list)
     images_select = Image.objects.filter(pk__in=images_list)
 
     context = {
         'images': images_select,
-    } 
-
-    # print(type(images))
+    }
+   
     return render(request, 'images/carousel.html', context)
+
+
+def image_download(request):
+    print("SELECTED")
+    return redirect(carousel_run)

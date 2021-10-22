@@ -42,14 +42,12 @@
                             <div class="card-img-overlay">
                                 <button type="submit" class="image-btn"><i class="fas fa-heart fa-lg "></i></button>                        
                             </div>
-                            <p class="card-img-bottom">{{ image.name }}</p>
-                            <p class="card-img-bottom">{{ image.id }}</p>
                         {% else %}
                             <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png"
                                 alt="{{ image.name }}">
                         {% endif %}
                             <input type="hidden" name="redirect_url" value="{{ request.path }}">   
-                        </form>    
+                        </form>
                     </div>
                 </div>    
                 {% endfor %}

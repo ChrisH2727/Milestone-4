@@ -54,14 +54,11 @@ def carousel_run(request):
     images_dict = request.session['images']
     images_list = dict.values(images_dict)
     images_select = Image.objects.filter(pk__in=images_list)
+    download_paidfor = True
 
     context = {
         'images': images_select,
+        'download_paidfor': download_paidfor,
     }
-   
+
     return render(request, 'images/carousel.html', context)
-
-
-def image_download(request):
-    print("SELECTED")
-    return redirect(carousel_run)

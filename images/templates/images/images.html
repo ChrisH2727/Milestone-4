@@ -40,7 +40,8 @@
                         {% if image.image %}                
                             <img class="img-thumbnail thumb_im_adj" src="{{ image.image.url }}" alt="{{ image.name }}">
                             <div class="card-img-overlay">
-                                <button type="submit" class="image-btn"><i class="fas fa-heart fa-lg "></i></button>                        
+                                <button type="submit" class="image-btn"><i class="fas fa-heart fa-lg "></i></button>
+                                <a href="{% url 'image_info' image.id %}" class="image-btn"><i class=" fa fa-info-circle"></i></a>                        
                             </div>
                         {% else %}
                             <img class="card-img-top img-fluid thumbnail" src="{{ MEDIA_URL }}noimage.png"

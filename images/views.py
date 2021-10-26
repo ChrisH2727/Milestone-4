@@ -62,3 +62,16 @@ def carousel_run(request):
     }
 
     return render(request, 'images/carousel.html', context)
+
+
+def image_info(request, image_id):
+    """
+    Collects images ids for display in the carousel
+    """
+
+    print("got here", image_id)
+    image_details = get_object_or_404(Image, pk=image_id)
+    print(image_details.size)
+    messages.error(request, f'Image file size: {image_details.name}')
+
+    return redirect(all_images)

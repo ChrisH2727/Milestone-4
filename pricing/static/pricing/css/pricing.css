@@ -1,3 +1,4 @@
+
 .StripeElement,
 .stripe-style-input {
   box-sizing: border-box;
@@ -90,11 +91,11 @@ outline: none;
 }
 
 button:focus {
-background: #555ABF;
+  background: #555ABF;
 }
 
 button:active {
-background: #43458B;
+  background: #43458B;
 }
 
 .outcome {

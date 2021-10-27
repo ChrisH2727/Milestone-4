@@ -9,7 +9,6 @@
 Code from stripe
 */
 
-
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 var stripe = Stripe(stripePublicKey);
@@ -31,7 +30,8 @@ var style = {
         iconColor: '#dc3545'
     }
 };
-// Change config to hide post/zip code. Not a European feature 
+// Change config to hide post/zip code. Not a European feature
+
 var card = elements.create('card', {hidePostalCode: true,  style: style});
 card.mount('#card-element');
 
@@ -56,8 +56,12 @@ var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
+
+    //prevent the card details from being submitted more than once
+    //for the same transaction
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
+
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -66,10 +70,11 @@ form.addEventListener('submit', function(ev) {
         if (result.error) {
             var errorDiv = document.getElementById('card-errors');
             var html = `
-                <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
+                <span class='icon' role='alert'>
+                <i class='fas fa-times'></i>
                 </span>
                 <span>${result.error.message}</span>`;
+
             $(errorDiv).html(html);
             card.update({ 'disabled': false});
             $('#submit-button').attr('disabled', false);

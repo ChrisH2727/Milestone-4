@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'images',
     'pricing',
     'mailme',
-    'checkout',
     'profiles',
     # Other Apps that are required
     'crispy_forms',

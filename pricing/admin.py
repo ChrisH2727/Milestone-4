@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Subscription
 
 
-class Subscription(admin.SubscriptionAdmin):
+class SubscriptionAdmin(admin.ModelAdmin):
     list_display = (
         'sub_type',
         'sub_name',

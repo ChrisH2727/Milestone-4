@@ -72,3 +72,22 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_number
+
+
+class Subscription(models.Model):
+    """
+    Defines the types of subscriptions on offer
+    """
+    sub_type = models.PositiveIntegerField(null=True, blank=True)
+    sub_name = models.CharField(max_length=254, blank=True, null=True)
+    sub_display_name = models.CharField(max_length=254, blank=True, null=True)
+    sub_display_description = models.CharField(max_length=254, blank=True, null=True)
+    sub_duration = models.PositiveIntegerField(null=True, blank=True)
+    sub_images = models.PositiveIntegerField(null=True, blank=True)
+    sub_price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.sub_name
+
+    def get_display_name(self):
+        return self.sub_display_name

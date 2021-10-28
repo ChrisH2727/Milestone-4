@@ -29,7 +29,7 @@ def pricing_options(request):
         }
         print("posted")
         return redirect(reverse('checkout_success'))
-    else:
+
         stripe.api_key = stripe_secret_key
 
         intent = stripe.PaymentIntent.create(
@@ -39,17 +39,17 @@ def pricing_options(request):
         print(intent)
         print("not posted")
     
-    if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-        Did you forget to set it in your environment?')
+        if not stripe_public_key:
+            messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
 
-    context = {
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
-        'stripe_total': stripe_total,
-    }
+        context = {
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+            'stripe_total': stripe_total,
+        }
 
-    return render(request, 'pricing/checkout.html', context)
+        return render(request, 'pricing/checkout.html', context)
 
 
 def checkout_success(request):

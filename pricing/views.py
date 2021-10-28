@@ -2,16 +2,39 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from django.conf import settings
+from .models import Subscription
 
 import stripe
 import json
 
 def pricing(request):
+    """
+    Renders the subscription template and
+    passes the subscription object through.
+    """
 
-    return render(request, 'pricing/pricing.html')
+    subscriptions = Subscription.objects.all()
 
+    template = 'pricing/pricing.html'
 
-def pricing_options(request):
+    context = {
+            'subscriptions': subscriptions
+        }
+    return render(request, template, context)
+
+def trolly(request):
+    """
+    Adds the selected subscription option to the trolly
+    calls for the payment form to be generated
+    """
+    template = 'pricing/checkout.html'
+
+    context = {
+            'subscriptions': subscriptions
+        }
+    return render(request, template, context)
+
+def payment_request(request):
 
     # Built from Stripe code & Code Institute Boutique Ado tutorial
     # Initially stripped out to just the bare bones and then re-

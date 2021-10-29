@@ -82,17 +82,14 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # required to keep list of images for purchase and
-                # download to customer keep for later
-                #'trolly.contexts.trolly_contents',
+                # required to keep list of images
+                # and/or subscriptions for purchase
+                'pricing.contexts.trolly_contents',
 
                 # required to keep list of images for display by the image
                 # carousel
                 'images.contexts.carousel_contents',
 
-                # required to store the subscription that the customer has
-                # selected for purchase keep for later
-                #'subscription.contexts.subscription_contents',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

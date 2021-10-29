@@ -5,6 +5,7 @@ from profiles.models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class Pricing(models.Model):
     """
     Provides the pricing for all the
@@ -22,13 +23,13 @@ class Pricing(models.Model):
     def get_display_name(self):
         return self.display_name
 
+
 class Order(models.Model):
     """
     Provides the pricing for all the
     subscription options
     """
 
-class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
                                      null=True, blank=True, related_name='orders')
@@ -48,7 +49,6 @@ class Order(models.Model):
         """
         return uuid.uuid4().hex.upper()
 
-
     def update_total(self):
         """
         Calculate sales tax and generate grand total
@@ -57,7 +57,6 @@ class Order(models.Model):
         self.sales_tax = self.order_total * (settings.SALES_TAX_RATE / 100)
         self.grand_total = self.order_total + self.sales_tax
         self.save()
-
 
     def save(self, *args, **kwargs):
         """
@@ -69,7 +68,6 @@ class Order(models.Model):
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
 
-
     def __str__(self):
         return self.order_number
 
@@ -78,6 +76,7 @@ class Subscription(models.Model):
     """
     Defines the types of subscriptions on offer
     """
+    sku = models.CharField(max_length=254, blank=True, null=True)
     sub_type = models.PositiveIntegerField(null=True, blank=True)
     sub_name = models.CharField(max_length=254, blank=True, null=True)
     sub_display_name = models.CharField(max_length=254, blank=True, null=True)
@@ -91,3 +90,16 @@ class Subscription(models.Model):
 
     def get_display_name(self):
         return self.sub_display_name
+
+class Trolly (models.Model):
+    """
+    Provides the on-line store shopping trolly
+    """
+    sku = models.CharField(max_length=254, blank=True, null=True)
+    sub_name = models.CharField(max_length=254, blank=True, null=True)
+    sub_display_name = models.CharField(max_length=254, blank=True, null=True)
+    image = models.ImageField(null=True, blank=True)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.sub_name

@@ -11,7 +11,7 @@ def webhook(request):
     """
     Listen for webhooks from Stripe
     """
-
+    print("webhook response")
     # Built from Stripe code & Code Institute Boutique Ado tutorial
     # Initially stripped out to just the bare bones and then re-
     # built to provide the required functionality for this application
@@ -19,8 +19,7 @@ def webhook(request):
     # Setup
     wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    print(wh_secret)
-    print(stripe.api_key)
+
     # Get the webhook data and verify its signature
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
@@ -28,7 +27,7 @@ def webhook(request):
 
     try:
         event = stripe.Webhook.construct_event(payload, sig_header, wh_secret)
-        print(event)
+        print("event --", event)
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -51,7 +50,7 @@ def webhook(request):
 
     # Get the webhook type from Stripe
     event_type = event['type']
-    print(event_type)
+    print("event type--", event_type)
     # If there is a handler for it, get it from the event map
     # Use the generic one by default
     event_handler = event_map.get(event_type, handler.handle_event)

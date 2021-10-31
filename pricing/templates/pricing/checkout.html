@@ -40,6 +40,11 @@
                             <td>{{subscription.sub_display_name}}</td>
                             <td>{{subscription.sub_price}}</td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td>Total</td>
+                            <td>{{stripe_total}}</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -62,7 +67,7 @@
                 <div class="group">
                     <label>
                         <span>Name</span>
-                        <input id="card_name" class="field" placeholder="John Doe" />
+                        <input id="full_name" class="field" placeholder="John Doe" />
                     </label>
                 </div>
                 <div class="group">

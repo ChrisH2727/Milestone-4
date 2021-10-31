@@ -36,6 +36,7 @@ var card = elements.create('card', {
     hidePostalCode: true,
     style: style
 });
+console.log("got client secrete")
 card.mount('#card-element');
 
 // Handle realtime validation errors on the card element
@@ -56,7 +57,7 @@ card.addEventListener('change', function (event) {
 
 // Handle form submit
 var form = document.getElementById('payment-form');
-
+console.log("got here")
 form.addEventListener('submit', function (ev) {
     ev.preventDefault();
 
@@ -66,8 +67,8 @@ form.addEventListener('submit', function (ev) {
         'disabled': true
     });
     $('#submit-button').attr('disabled', true);
-    $('#payment-form').fadeToggle(100);
-    // $('#loading-overlay').fadeToggle(100);
+    //$('#payment-form').fadeToggle(100);
+    //$('#loading-overlay').fadeToggle(100);
 
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
     // From using {% csrf_token %} in the form
@@ -77,12 +78,16 @@ form.addEventListener('submit', function (ev) {
         'client_secret': clientSecret,
         'save_info': saveInfo,
     };
-    var url = '/pricing/cache_checkout_data/';
+    //var url = '/pricing/cache_checkout_data/';
 
-    $.post(url, postData).done(function () {
+    //$.post(url, postData).done(function () {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
+                billing_details: {
+                    name: $.trim(form.full_name.value),
+                    //name: 'Joe Black'
+                    }
             },
 
         }).then(function (result) {
@@ -104,12 +109,12 @@ form.addEventListener('submit', function (ev) {
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
                     form.submit();
-                    print("form submit")
+                    console.log("form submit")
                 }
             }
         });
-    }).fail(function () {
+    //}).fail(function () {
         // just reload the page, the error will be in django messages
-        location.reload();
-    })
+    //    location.reload();
+    //})
 });

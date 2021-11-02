@@ -60,7 +60,9 @@ margin-right: 30px;
 .field {
 background: transparent;
 font-weight: 300;
-border: 0;
+border: 1px solid transparent;
+border-radius: 0px;
+
 color: #31325F;
 outline: none;
 flex: 1;
@@ -75,7 +77,7 @@ cursor: text;
 button {
 float: left;
 display: block;
-background: #666EE8;
+background: green;
 color: white;
 box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10),
             0 3px 6px 0 rgba(0,0,0,0.08);
@@ -91,7 +93,7 @@ outline: none;
 }
 
 button:focus {
-  background: #555ABF;
+  background: green;
 }
 
 button:active {
@@ -126,4 +128,9 @@ color: #666EE8;
 .success .token {
 font-weight: 500;
 font-size: 13px;
+}
+
+.fieldset-label {
+  position: relative;
+  right: .5rem;
 }

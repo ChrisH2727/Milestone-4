@@ -60,31 +60,42 @@
     </div>
 
     <div class"row">
-        <div class="col col-lg-6 offset-3">
+        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
             <form action="{% url 'payment_request' %}" method="POST" id="payment-form">
                 {% csrf_token %}
+                
+                
+                <fieldset class="rounded px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                        {{ order_form.full_name | as_crispy_field }}
+                        {{ order_form.email | as_crispy_field }}
+                        {{ order_form.mobile_phone_number | as_crispy_field }}
+                </fieldset>
+                
 
-                <div class="group">
-                    <label>
-                        <span>Name</span>
-                        <input id="full_name" class="field" placeholder="John Doe" />
-                    </label>
-                </div>
-                <div class="group">
-                    <label>
-                        <span>Card</span>
-                        <div id="card-element" class="field"></div>
-                    </label>
-                </div>
-                <button type="submit" id="submit-button">Pay</button>
-                <div class="outcome">
-                    <div id="card-errors"></div>
-                    <div class="success">
-                        Success! Your Stripe token is <span class="token"></span>
+                <fieldset class="rounded px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                    <div class="field">
+                        <p>Card Holders Name</p>
+                        <input id="card_name" name="card_name" class="field" placeholder="John Doe">
                     </div>
-                </div>
-                <!--Any card errors here!-->
-                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                
+                    <div class="field">
+                        <p>Card Long Code</p>
+                        <div id="card-element"></div>
+                    </div>
+                </fieldset>
+                <fieldset class="rounded px-3 mb-5">
+                    <button type="submit" id="submit-button">Pay</button>
+                    <div class="outcome">
+                        <div id="card-errors"></div>
+                        <div class="success">
+                            Success! Your Stripe token is <span class="token"></span>
+                        </div>
+                    </div>
+                    <!--Any card errors here!-->
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                </fieldset>    
 
                 <!-- Pass the client secret to the view so we can get the payment intent id-->
                 <input type="hidden" value="{{ client_secret }}" name="client_secret">

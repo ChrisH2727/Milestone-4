@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.conf import settings
 from .models import Subscription
 from django.db.models import Sum
+from .forms import OrderForm
 
 import stripe
 import json
@@ -64,9 +65,13 @@ def payment_request(request):
     if request.method == 'POST':
         form_data = {
             'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'mobile_phone_number': request.POST['mobile_phone_number'],
         }
-        print("posted")
+        
+        print("************************************************************************************full_name")
         return redirect(reverse('checkout_success'))
+
 
     else:
         stripe.api_key = stripe_secret_key
@@ -75,12 +80,15 @@ def payment_request(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-
+        
+        order_form = OrderForm()
+        
         if not stripe_public_key:
             messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
         context = {
+            'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
             'stripe_total': stripe_total,

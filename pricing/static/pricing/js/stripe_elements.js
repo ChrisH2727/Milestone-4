@@ -57,6 +57,7 @@ card.addEventListener('change', function (event) {
 
 // Handle form submit
 var form = document.getElementById('payment-form');
+var card_name =document.getElementById('card_name'); 
 console.log("got here")
 form.addEventListener('submit', function (ev) {
     ev.preventDefault();
@@ -85,8 +86,8 @@ form.addEventListener('submit', function (ev) {
             payment_method: {
                 card: card,
                 billing_details: {
-                    name: $.trim(form.full_name.value),
-                    //name: 'Joe Black'
+                    // name: $.trim(form.full_name.value),
+                    name: card_name,
                     }
             },
 
@@ -109,7 +110,6 @@ form.addEventListener('submit', function (ev) {
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
                     form.submit();
-                    console.log("form submit")
                 }
             }
         });

@@ -15,7 +15,12 @@
         <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'pricing' %}">Pricing</a>
       </li>
       <li class="nav-item">
-        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'mailme' %}">Request an Image</a>
+        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'image_request' %}">Request an Image</a>
       </li>
+      {% if request.user.is_superuser %}
+        <li class="nav-item">
+          <a class="logo-font font-weight-bold nav-link text-black mr-5" href=" # ">Image Management</a>
+        </li>
+      {% endif %}  
     </ul>
 </div>

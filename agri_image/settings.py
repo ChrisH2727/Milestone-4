@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'home',
     'images',
     'pricing',
-    'mailme',
+    'mailmeto',
     'profiles',
+    'management',
     # Other Apps that are required
     'crispy_forms',
     'storages',

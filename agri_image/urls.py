@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('images/', include('images.urls')),
     path('pricing/', include('pricing.urls')),
-    path('mailme/', include('mailme.urls')),
+    path('mailmeto/', include('mailmeto.urls')),
+    path('management/', include('management.urls')),
     path('profiles/', include('profiles.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

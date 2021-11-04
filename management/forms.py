@@ -1,8 +1,8 @@
 from django import forms
-from .models import RequestImage
+from mailmeto.models import RequestImage
 
 
-class RequestForm(forms.ModelForm):
+class ResponseForm(forms.ModelForm):
     """
     Sets up the image reponseform
     """
@@ -14,4 +14,5 @@ class RequestForm(forms.ModelForm):
             'request_email',
             'category',
             'description',
+            'image',
             )

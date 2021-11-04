@@ -22,5 +22,28 @@
                 <hr>
             </div>
         </div>
-    </div>    
+        <table class="table table-sm table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Image Request</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for request in requests%}   
+                <tr>
+                    <th scope="row">{{request.id}}</th>
+                    <td>{{request.description}}</td>
+                    <td>
+                        <a href="{% url 'edit_request' request.id %}">Edit</a> | 
+                    </td>
+                    <td>
+                        <a class="text-danger" href="{% url 'delete_request' request.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

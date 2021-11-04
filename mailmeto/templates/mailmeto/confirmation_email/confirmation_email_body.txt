@@ -1,0 +1,17 @@
+Hello {{ image_response.request_name }}!
+
+This is a confirmation of your request for us to feature a new image.
+
+Description: {{ image_response.description }}
+Category: {{ image_response.category }}
+
+We will email you again with the details of a choice of suitable images 
+
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your request!
+
+Sincerely,
+
+AgiView

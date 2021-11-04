@@ -4,11 +4,14 @@ from .models import RequestImage
 
 class RequestAdmin(admin.ModelAdmin):
     list_display = (
+        'request_number',
+        'request_date',
         'category',
         'request_name',
         'request_email',
         'description',
-        'image'
+        'image',
+        'availability_date'
         )
 
 

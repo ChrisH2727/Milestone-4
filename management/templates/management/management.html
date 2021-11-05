@@ -31,19 +31,20 @@
               </tr>
             </thead>
             <tbody>
-                {% for request in requests%}   
+                {% for request in requests %}   
                 <tr>
                     <th scope="row">{{request.id}}</th>
                     <td>{{request.description}}</td>
                     <td>
-                        <a href="{% url 'edit_request' request.id %}">Edit</a> | 
+                        <a href="{% url 'edit_request' request.id%}">Edit</a> 
                     </td>
                     <td>
-                        <a class="text-danger" href="{% url 'delete_request' request.id %}">Delete</a>
+                        <a class="text-danger" href="{% url 'delete_request' request.id%}">Delete</a>
                     </td>
                 </tr>
-                {% endfor%}
+                {% endfor %}
             </tbody>
         </table>
+        <p>{{request.id}}</p>
     </div>
 {% endblock %}

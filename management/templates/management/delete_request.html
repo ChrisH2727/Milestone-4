@@ -24,22 +24,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"> 
-            <form action="{% url 'delete_request' %}" method="POST" id="request-image">
-                {% csrf_token %}
-                <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Delete a Request</legend>
-                        {{ form.request_name | as_crispy_field }}
-                        {{ form.request_email | as_crispy_field }}
-                        {{ form.description | as_crispy_field }}
-                        {{ form.category | as_crispy_field }}
-                </fieldset>
-                <fieldset class="rounded px-3 mb-5">
-                    <div class="col text-center">
-                        <button type="submit btn btn-primary bg-success border border-success" id="submit-button">Submit Delete</button>
-                    </div>
-                </fieldset>
-            </form>
+        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
+            {{ form | crispy }}  
         </div>    
     </div> 
 {% endblock %}

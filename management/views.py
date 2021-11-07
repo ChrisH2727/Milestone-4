@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from mailmeto.models import RequestImage
 from .forms import ResponseForm
 from django.contrib import messages
+from .email_handler import send_confirmation_email
+
 
 def management(request):
     """
@@ -26,10 +28,23 @@ def edit_request(request, ask_id):
         # save image request
         if response_form.is_valid():
             response_form.save()
-            
-            #send_confirmation_email(image_response)
 
+            # display confirmation message 
+            messages.success(request, f'Image request successfully processed! \
+            A confirmation email will be sent to the subscriber')
+
+            # send confirmation email
+            image_response = {
+                'request_name': response_form.cleaned_data['request_name'],
+                'request_email': response_form.cleaned_data['request_email'],
+                'description': response_form.cleaned_data['description'],
+                'category': response_form.cleaned_data['category'],
+                'image': response_form.cleaned_data['image']
+            }
+            delivered = True
+            send_confirmation_email(image_response, delivered)
             return redirect(management)
+
         else:
             messages.error(request, f'Please complete the form correctly')
 
@@ -57,7 +72,17 @@ def delete_request(request, ask_id):
         response_form = ResponseForm(request.POST)
         # delete image request 
         if response_form.is_valid():
-            #response_form.save()
+
+            # send confirmation email
+            image_response = {
+                'request_name': response_form.cleaned_data['request_name'],
+                'request_email': response_form.cleaned_data['request_email'],
+                'description': response_form.cleaned_data['description'],
+                'category': response_form.cleaned_data['category']
+            }
+            delivered = False
+            send_confirmation_email(image_response, delivered)
+
             RequestImage.objects.filter(id=ask_id).delete()
             #send_confirmation_email(image_response)
 

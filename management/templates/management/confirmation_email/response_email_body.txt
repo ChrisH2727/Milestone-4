@@ -1,0 +1,16 @@
+Hello {{ image_response.request_name }}!
+
+We have not been able to source the image that you requested.
+
+Description: {{ image_response.description }}
+Category: {{ image_response.category }}
+Image Number: {{ image_response.image }}
+
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your request!
+
+Sincerely,
+
+AgiView

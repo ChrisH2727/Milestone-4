@@ -10,6 +10,7 @@ class ResponseForm(forms.ModelForm):
     class Meta:
         model = RequestImage
         fields = (
+            'id',
             'request_name',
             'request_email',
             'category',

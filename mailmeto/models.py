@@ -16,4 +16,4 @@ class RequestImage(models.Model):
     description = models.CharField(max_length=25, null=False, blank=False)
     request_date = models.DateTimeField(auto_now_add=True)
     availability_date = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.CharField(max_length=25, null=False, blank=False, default="No image")

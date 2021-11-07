@@ -13,7 +13,7 @@ def image_request(request):
     request_form = RequestForm()
     if request.method == 'POST':
         form = RequestForm(request.POST or None)
-
+        print("post mailmeto")
         # save image request 
         if form.is_valid():
             request_name = form.cleaned_data['request_name']

@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12 text-center">
-            <a href="#" class= " btn btn-small btn-primary bg-success border border-success">Add an Image</a>
+            <a href="{% url 'image_management_add' %}" class= " btn btn-small btn-primary bg-success border border-success">Add an Image</a>
             <a href="{% url 'home' %}" class= " btn btn-small btn-primary bg-danger border border-danger">Return</a>
             <hr>
         </div>    
@@ -47,10 +47,10 @@
                     <th scope="row">{{image.id}}</th>
                     <td>{{image.name}}</td>
                     <td>
-                        <a href="#" class= "btn btn-small btn-primary bg-success border border-success">Edit</a> 
+                        <a href="{% url 'image_management_edit' image.id %}" class= "btn btn-small btn-primary bg-success border border-success">Edit</a> 
                     </td>
                     <td>
-                        <a href="#" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
+                        <a href ="{% url 'image_management_delete' image.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

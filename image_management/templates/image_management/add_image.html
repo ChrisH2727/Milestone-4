@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"">
+            <hr>
+            <h2 class="logo-font mb-4 text-center ">Add an Image</h2>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"> 
+            <form action="{% url 'image_management_add' %}" method="POST" id="request-image">
+                {% csrf_token %}
+                <fieldset class="rounded px-3 mb-5">
+                        {{ add_image_form | crispy }}
+                </fieldset>
+                <fieldset class="rounded px-3 mb-5">
+                    <div class="col text-center">
+                        <button type="submit" class= "btn btn-primary bg-success border border-success" id="submit-button">Add Image</button>
+                        <a href="{% url 'home' %}" class= " btn btn-small btn-primary bg-danger border border-danger">Return</a>
+                    </div>
+                </fieldset>
+            </form>
+        </div>    
+    </div>
+
+{% endblock %}

@@ -1,10 +1,12 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib.auth.decorators import login_required
 from mailmeto.models import RequestImage
 from .forms import ResponseForm
 from django.contrib import messages
 from .email_handler import send_confirmation_email
 
 
+@login_required
 def management(request):
     """
     Populates image response template
@@ -29,7 +31,7 @@ def edit_request(request, ask_id):
         if response_form.is_valid():
 
             # display confirmation message
-            messages.success(request, f'Image request successfully processed! \
+            messages.success(request,'Image request successfully processed! \
             A confirmation email will be sent to the subscriber')
 
             # send confirmation email
@@ -66,8 +68,9 @@ def edit_request(request, ask_id):
         }
 
     return render(request, template, context)
-  
 
+
+@login_required
 def delete_request(request, ask_id):
     """
     Delete the request for an image
@@ -88,7 +91,7 @@ def delete_request(request, ask_id):
             }
             delivered = False
             send_confirmation_email(image_response, delivered)
-            
+
             # delete the image request
             image_request = get_object_or_404(RequestImage, pk=ask_id)
             image_request.delete()
@@ -97,11 +100,11 @@ def delete_request(request, ask_id):
             return redirect(management)
         else:
             messages.error(request, 'The image request has not been deleted.')
-    
+
     else:
         request_for_image = get_object_or_404(RequestImage, id=ask_id)
         form = ResponseForm(instance=request_for_image)
-        
+
     template = 'management/delete_request.html'
 
     context = {

@@ -16,16 +16,16 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
                 <hr>
-                <h2 class="logo-font mb-4">Image Management</h2>
-                <hr>
+                <h2 class="logo-font mb-4 text-center">Image Request Management</h2>
             </div>
         </div>
-        <table class="table table-sm table-hover">
+        <table class="table table-sm table-hover col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
             <thead>
               <tr>
-                <th scope="col">Image Request</th>
+                <th scope="col">Request Id</th>
+                <th scope="col">Description</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
               </tr>
@@ -36,15 +36,15 @@
                     <th scope="row">{{request.id}}</th>
                     <td>{{request.description}}</td>
                     <td>
-                        <a href="{% url 'edit_request' request.id%}">Edit</a> 
+                        <a href="{% url 'edit_request' request.id%}" class= "btn btn-small btn-primary bg-success border border-success">
+                        Edit</a> 
                     </td>
                     <td>
-                        <a class="text-danger" href="{% url 'delete_request' request.id%}">Delete</a>
+                        <a href="{% url 'delete_request' request.id%}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <p>{{request.id}}</p>
     </div>
 {% endblock %}

@@ -16,9 +16,9 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12 ">
                 <hr>
-                <h2 class="logo-font mb-4">Edit Image Request</h2>
+                <h2 class="logo-font mb-4 text-center">Image Request</h2>
                 <hr>
             </div>
         </div>
@@ -28,12 +28,13 @@
             <form action="{% url 'edit_request' ask_id %}" method="POST" id="request-image">
                 {% csrf_token %}
                 <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Edit a Request</legend>
+                    <legend class="fieldset-label large text-black px-2 w-auto">Edit a Request</legend>
                         {{ form | crispy}}
                 </fieldset>
                 <fieldset class="rounded px-3 mb-5">
                     <div class="col text-center">
-                        <button type="submit" class=" btn btn-primary bg-success border border-success" id="submit-button">Submit Request</button>
+                        <button type="submit" class="btn btn-small btn-primary bg-success border border-success" id="submit-button">Submit Request</button>
+                        <a href="{% url 'management' %}" class= " btn btn-small btn-primary bg-danger border border-danger">Return</a>
                     </div>
                 </fieldset>
             </form>

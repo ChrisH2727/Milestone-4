@@ -20,7 +20,7 @@ def image_management(request):
 
 
 @login_required
-def image_management_add(request, ask_id):
+def image_management_add(request):
     """
     Populates image inventory management template
     """
@@ -47,7 +47,7 @@ def image_management_add(request, ask_id):
             'add_image_form': add_image_form,
             }
 
-    return render(request, 'image_management/image_management.html', context)
+    return render(request, 'image_management/add_image.html', context)
 
 
 def image_management_edit(request, ask_id):

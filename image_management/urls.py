@@ -11,5 +11,5 @@ urlpatterns = [
     path('<int:ask_id>/', views.image_management_add, name='image_management_add'),
     path('', views.image_management_add, name='image_management_add'),
     path('image_management/', views.image_management, name='image_management'),
-    path('add_image/<int:ask_id>/', views.image_management_add, name='image_management_add'),
+    path('add_image/', views.image_management_add, name='image_management_add'),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from mailmeto.models import RequestImage
 from .forms import ResponseForm
 from django.contrib import messages
@@ -27,9 +27,8 @@ def edit_request(request, ask_id):
         response_form = ResponseForm(request.POST)
         # save image request
         if response_form.is_valid():
-            response_form.save()
 
-            # display confirmation message 
+            # display confirmation message
             messages.success(request, f'Image request successfully processed! \
             A confirmation email will be sent to the subscriber')
 
@@ -41,12 +40,19 @@ def edit_request(request, ask_id):
                 'category': response_form.cleaned_data['category'],
                 'image': response_form.cleaned_data['image']
             }
+
+            # Update the request
+            RequestImage.objects.filter(id=ask_id).update(
+                image=response_form.cleaned_data['image']
+                )
+            messages.success(request, 'Image request updated')
+
             delivered = True
             send_confirmation_email(image_response, delivered)
             return redirect(management)
 
         else:
-            messages.error(request, f'Please complete the form correctly')
+            messages.error(request, 'Please complete the form correctly')
 
     else:
         request_for_image = get_object_or_404(RequestImage, id=ask_id)
@@ -60,8 +66,7 @@ def edit_request(request, ask_id):
         }
 
     return render(request, template, context)
-    
-
+  
 
 def delete_request(request, ask_id):
     """
@@ -70,6 +75,7 @@ def delete_request(request, ask_id):
 
     if request.method == 'POST':
         response_form = ResponseForm(request.POST)
+
         # delete image request 
         if response_form.is_valid():
 
@@ -82,13 +88,15 @@ def delete_request(request, ask_id):
             }
             delivered = False
             send_confirmation_email(image_response, delivered)
-
-            RequestImage.objects.filter(id=ask_id).delete()
-            #send_confirmation_email(image_response)
+            
+            # delete the image request
+            image_request = get_object_or_404(RequestImage, pk=ask_id)
+            image_request.delete()
+            messages.success(request, 'Image request deleted')
 
             return redirect(management)
         else:
-            messages.error(request, f'The image request has not been deleted.')
+            messages.error(request, 'The image request has not been deleted.')
     
     else:
         request_for_image = get_object_or_404(RequestImage, id=ask_id)

@@ -83,6 +83,7 @@
                 <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
                 {% if request.user.is_superuser %}
                   <a href="{% url 'management' %}" class="dropdown-item">Image Management</a>
+                  <a href="{% url 'image_management' %}" class="dropdown-item">Image Inventory</a>
                 {% endif %}
                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
               {% else %}

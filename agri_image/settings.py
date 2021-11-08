@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'mailmeto',
     'profiles',
     'management',
+    'image_management',
     # Other Apps that are required
     'crispy_forms',
     'storages',

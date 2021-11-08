@@ -27,4 +27,5 @@ urlpatterns = [
     path('mailmeto/', include('mailmeto.urls')),
     path('management/', include('management.urls')),
     path('profiles/', include('profiles.urls')),
+    path('image_management/', include('image_management.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

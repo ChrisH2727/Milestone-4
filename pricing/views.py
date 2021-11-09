@@ -78,14 +78,14 @@ def payment_request(request):
         return render(request, 'pricing/checkout_success.html')
 
     else:
+
+        profile = UserProfile.objects.get(user=request.user)
         stripe.api_key = stripe_secret_key
 
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-
-        profile = UserProfile.objects.get(user=request.user)
 
         # Attempt to prefill the form with any info the user maintains in their profile
         order_form = OrderForm(initial={

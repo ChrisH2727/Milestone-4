@@ -4,6 +4,12 @@ from django.conf import settings
 from .models import Subscription
 from django.db.models import Sum
 from .forms import OrderForm
+from profiles.models import UserProfile
+from profiles.forms import UserProfileForm
+from .models import Order
+from django.conf import settings
+from django.contrib.auth.models import User
+from profiles.models import UserProfile
 
 import stripe
 import json
@@ -45,7 +51,6 @@ def payment_request(request):
     # Built from Stripe code & Code Institute Boutique Ado tutorial
     # Initially stripped out to just the bare bones and then re-
     # built to provide the required functionality for this application
-    print("payment_request")
 
     trolly_dict = request.session['trolly']
     trolly_values = dict.values(trolly_dict)
@@ -57,7 +62,8 @@ def payment_request(request):
         sku__in=trolly_values).aggregate(Sum('sub_price'))
 
     for key, value in subscriptions_total.items():
-        stripe_total = int(value)
+        stripe_total = int(value)*100
+        net_total = float(value)
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -68,10 +74,8 @@ def payment_request(request):
             'email': request.POST['email'],
             'mobile_phone_number': request.POST['mobile_phone_number'],
         }
-        
-        print("************************************************************************************full_name")
-        return redirect(reverse('checkout_success'))
 
+        return render(request, 'pricing/checkout_success.html')
 
     else:
         stripe.api_key = stripe_secret_key
@@ -80,20 +84,33 @@ def payment_request(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-        
-        order_form = OrderForm()
+
+        profile = UserProfile.objects.get(user=request.user)
+
+        # Attempt to prefill the form with any info the user maintains in their profile
+        order_form = OrderForm(initial={
+            'full_name': request.user,
+            'email': profile.user.email,
+            'order_total': net_total,
+            'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
+            'sales_tax_rate':settings.SALES_TAX_RATE,
+            'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
+            })
         
         if not stripe_public_key:
             messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
         context = {
+            'net_total': net_total,
+            'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
+            'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
+            'sales_tax_rate':settings.SALES_TAX_RATE,
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
-            'stripe_total': stripe_total,
             'subscriptions': subscriptions_select,
-        }
+            }
 
     return render(request, 'pricing/checkout.html', context)
 
@@ -101,7 +118,7 @@ def checkout_success(request):
     """
     Handles a sucessful checkout
     """
-    messages.success(request, f'Order processed')
+    messages.success(request, 'Order processed')
         
     template = "pricing/checkout_success.html"
 

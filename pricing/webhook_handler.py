@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .email_handler import send_order_confirmation_email
 from .models import Order
+from pprint import pprint
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -23,15 +24,17 @@ class StripeWH_Handler:
         intent = event.data.object
         
         # Find orders that have been placed but no response email sent
-        payments_made = Order.objects.filter(completed=False)
-        
-        for key, value in payments_made.items():
-            print("payments", payments_made)
-
-        
-        
-        #for payments in payments_made:
-        #    print("payments_made", payments_made[id])
+        # and send confirmation email
+        for order in Order.objects.all():
+            if not order.completed:
+                order_details = {
+                    'full_name': order.full_name,
+                    'email': order.email,
+                    'order_number': order.order_number
+                    }
+                send_order_confirmation_email(order_details)
+                order.completed = True
+                order.save()
 
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',

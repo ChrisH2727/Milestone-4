@@ -69,13 +69,13 @@ def payment_request(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'mobile_phone_number': request.POST['mobile_phone_number'],
-        }
-
-        return render(request, 'pricing/checkout_success.html')
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            messages.success(request, 'Order sucessfully placed added product!')
+            return render(request, 'pricing/checkout_success.html')
+        else:
+            messages.error(request, 'Failed to to place order')
 
     else:
 
@@ -113,6 +113,7 @@ def payment_request(request):
             }
 
     return render(request, 'pricing/checkout.html', context)
+
 
 def checkout_success(request):
     """

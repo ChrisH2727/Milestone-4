@@ -1,11 +1,10 @@
-Hello {{ image_response.request_name }}!
+Hello {{ order_response.full_name }}!
 
-This is a confirmation of your request for us to feature a new image.
+This is a confirmation of your order.
 
-Description: {{ image_response.description }}
-Category: {{ image_response.category }}
+Order Number: {{ order_response.order_number }}
 
-We will email you again with the details of a choice of suitable images 
+
 
 
 If you have any questions, feel free to contact us at {{ contact_email }}.

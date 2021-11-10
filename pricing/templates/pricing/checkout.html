@@ -75,35 +75,26 @@
             <form action="{% url 'payment_request' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 
-                
                 <fieldset class="rounded px-3 mb-5">
-                        {{ order_form.full_name | as_crispy_field }}
-                        {{ order_form.email | as_crispy_field }}
-                        {{ order_form.mobile_phone_number | as_crispy_field }}
-
+                        {{ order_form | crispy }}
                 </fieldset>
                 
-                <fieldset class="rounded px-3 mb-5">
-                    <div class="field_pay">
-                        <p>Card Holders Name</p>
-                        <input id="card_name" name="card_name" class="field" placeholder="John Doe">
-                    </div>
-                
-                    <div class="field_pay">
-                        <p>Card Long Code</p>
-                        <div id="card-element"></div>
+                <fieldset class="rounded px-3 mb-5">                 
+                    <div class="w-100 border-dark">
+                        <p>Card Long Code*</p>
+                        <div id="card-element" class="w-100 border-dark rounded px-3" ></div>
                     </div>
                 </fieldset>
                 <fieldset class="rounded px-3 mb-5">
-                    <button type="submit" id="submit-button">Pay</button>
+                    <button type="submit" id="submit-button" class="w-100 btn btn-primary bg-success border border-success">Pay</button>
                     <div class="outcome">
-                        <div id="card-errors"></div>
+                        <!--Any card errors here!-->
+                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                        <!--Any card success here!-->
                         <div class="success">
-                            Success! Your Stripe token is <span class="token"></span>
+                            Success! <span class="token"></span>
                         </div>
                     </div>
-                    <!--Any card errors here!-->
-                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                 </fieldset>    
 
                 <!-- Pass the client secret to the view so we can get the payment intent id-->

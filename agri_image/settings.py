@@ -126,12 +126,10 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 if 'DATABASE_URL' in os.environ:
-    print("remote")
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL_OFF'))
     }
 else:
-    print("local")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

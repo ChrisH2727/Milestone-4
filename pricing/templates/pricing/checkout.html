@@ -32,6 +32,7 @@
                     <th>SKU Code</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,9 @@
                             <td>{{subscription.sub_name}}</td>
                             <td>{{subscription.sub_display_name}}</td>
                             <td>{{subscription.sub_price}}</td>
+                            <td>
+                                <a href ="{% url 'trolly_delete' subscription.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
+                            </td>
                         </tr>
                     {% endfor %}
                         <tr>
@@ -112,7 +116,7 @@
 </div-->
 {% endblock %}
 
-<!--Form the Code Institute Boutique Ado tutorial-->
+<!--js Form the Code Institute Boutique Ado tutorial and stripe -->
 {% block postloadjs %}
     {{ block.super }}
     {{ stripe_public_key|json_script:"id_stripe_public_key" }}

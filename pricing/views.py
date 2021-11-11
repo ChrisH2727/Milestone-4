@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 from .models import Subscription
@@ -10,6 +10,7 @@ from .models import Order
 from django.conf import settings
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
+from pprint import pprint
 
 import stripe
 import json
@@ -46,7 +47,25 @@ def trolly_add(request, subscription_id):
     return redirect(pricing)
 
 
+def trolly_delete(request, subscription_id):
+    """
+    Handles removal of item from the trolly
+    """
+    
+    trolly_content = request.session.get('trolly', {})
+
+    if subscription_id in trolly_content:
+        del trolly_content[subscription_id]
+        request.session["trolly_content"] = trolly_content
+
+    messages.success(request, 'Subscripion deteleted from the trolly.')
+
+    return redirect(payment_request)
+
 def payment_request(request):
+    """
+    Handles order summary and payment request
+    """
 
     # Built from Stripe code & Code Institute Boutique Ado tutorial
     # Initially stripped out to just the bare bones and then re-
@@ -73,7 +92,16 @@ def payment_request(request):
         if form.is_valid():
             order = form.save()
             messages.success(request, 'Order sucessfully placed added product!')
+
+            #trolly_content = request.session.get('trolly', {})
+            #for key in trolly_content:
+            #    del trolly_content[key]
+            #request.session["trolly_content"] = trolly_content    
+            if 'trolly' in request.session:
+                del request.session['trolly']
+
             return render(request, 'pricing/checkout_success.html')
+
         else:
             messages.error(request, 'Failed to to place order')
 
@@ -87,12 +115,14 @@ def payment_request(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        # Attempt to prefill the form with any info the user maintains in their profile
+        # Attempt to prefill the form with any info the user 
+        # maintains in their profile
         order_form = OrderForm(initial={
             'full_name': request.user,
             'email': profile.user.email,
             'order_total': net_total,
-            'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
+            'grand_total': (
+                settings.SALES_TAX_RATE/100 * net_total) + net_total,
             'sales_tax_rate':settings.SALES_TAX_RATE,
             'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
             })
@@ -117,11 +147,14 @@ def payment_request(request):
 
 def checkout_success(request):
     """
-    Handles a sucessful checkout
+    Handles a sucessful checkout and clears out the trolly
     """
+   
     messages.success(request, 'Order processed')
         
     template = "pricing/checkout_success.html"
 
     return render(request, template)
+
+
 

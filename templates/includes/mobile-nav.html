@@ -1,4 +1,4 @@
-<!--missing UL here to fix-->
+<UL>
     <li class="list-inline-item">
         <a class="text-black nav-link d-block d-sm-block d-md-none d-lg-none px-0" href="#" id="mobile-search"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,27 +37,15 @@
         <div class="dropdown-menu border-0" aria-labelledby="user-options">
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                    <!--a href=" # " class="dropdown-item">Image Management</a-->
+                    <a href="{% url 'image_management'%}" class="dropdown-item">Inventory Management</a>
+                    <a href="{% url 'management'%}" class="dropdown-item">Request Management</a>
                 {% endif %}
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                 {% else %}
                     <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
                     <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
             {% endif %}
         </div>
     </li>
-    <li class="list-inline-item">
-        <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-sm-block d-md-none d-lg-none px-0"
-            href="">
-            <div class="text-center">
-                <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                <p class="my-0">
-                    {% if grand_total %}
-                    ${{ grand_total|floatformat:2 }}
-                    {% else %}
-                    $0.00
-                    {% endif %}
-                </p>
-            </div>
-        </a>
-    </li>
+</UL>

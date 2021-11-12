@@ -16,7 +16,7 @@
 {% block content %}
 
 <div class="overlay"></div>
-<div class="container-fluid card-top">
+<div class="container-fluid">
     <div class="row">
         <div class="col text-center mt-3">
             <h2 class="logo-font">Carousel</h2>
@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="row">
-    <div id="carouselControls" class="carousel" data-ride="carousel">
+    <div id="carouselControls" class="carousel" data-ride="carousel-item">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="{{ image.image.url }}" alt="{{ image.name }}">

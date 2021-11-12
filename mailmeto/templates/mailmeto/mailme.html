@@ -11,9 +11,9 @@
 
 {% block content %}
 <div class="overlay"></div>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"">
+        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
             <hr>
             <h2 class="logo-font mb-4 text-center ">Request an Image</h2>
             <hr>
@@ -23,18 +23,16 @@
         <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"> 
             <form action="{% url 'image_request' %}" method="POST" id="request-image">
                 {% csrf_token %}
-                <fieldset class="rounded px-3 mb-5">
+
                         {{ request_form.request_name | as_crispy_field }}
                         {{ request_form.request_email | as_crispy_field }}
                         {{ request_form.description | as_crispy_field }}
                         {{ request_form.category | as_crispy_field }}
-                </fieldset>
-                <fieldset class="rounded px-3 mb-5">
-                    <div class="col text-center">
-                        <button type="submit" class= "btn btn-primary bg-success border border-success" id="submit-button">Submit Request</button>
+
+                    <div class=" text-center mt-5">
+                        <button type="submit" class= "btn btn-primary bg-success border border-success" id="submit-button mt-5">Submit Request</button>
                         <a href="{% url 'home' %}" class= " btn btn-small btn-primary bg-danger border border-danger">Return</a>
                     </div>
-                </fieldset>
             </form>
         </div>    
     </div>

@@ -1,26 +1,13 @@
 <div class="collapse navbar-collapse" id="wide-nav">
     <ul class="navbar-nav w-auto mx-auto mp-auto ">
-      <li class="nav-item dropdown">
-        
-          <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'images' %}" id="image-selector" 
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Images
-        </a>
-        <div class="dropdown-menu border-0" aria-labelledby="image-selector">
-          <a href="{% url 'images' %}" class="dropdown-item">Category</a>
-          <a href="{% url 'images' %}" class="dropdown-item ">Collections</a>
-          <a href="{% url 'images' %}" class="dropdown-item ">Dimensions</a>
-      </div
+      <li class="nav-item" >
+        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'images' %}">Images</a>
       </li>
       <li class="nav-item">
-        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'pricing' %}">Pricing</a>
+        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'pricing' %}">Subscription Options</a>
       </li>
       <li class="nav-item">
         <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'image_request' %}">Request an Image</a>
       </li>
-      {% if request.user.is_superuser %}
-        <li class="nav-item">
-          <a class="logo-font font-weight-bold nav-link text-black mr-5" href=" # ">Image Management</a>
-        </li>
-      {% endif %}  
     </ul>
 </div>

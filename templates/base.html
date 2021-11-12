@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
   {% endblock %}
 
   {% block extra_css %}
@@ -39,6 +40,9 @@
   </script>
   <!-- Stripe -->
   <script src="https://js.stripe.com/v3/"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
   {% endblock %}
 
   {% block extra_js %}
@@ -51,14 +55,13 @@
 <body>
   <header class="container-fluid fixed-top">
     <div class="row bg-white">
-      <div class="col-12 col-lg-3 col-md-3 my-auto py-1 py-lg-0 text-center text-lg-left">
+      <div class="col-12 col-lg-3 col-md-12 my-auto py-1 py-lg-0 text-center text-lg-left">
         <a href="{% url 'home' %}" class="nav-link main-logo-link">
           <h2 class="text-green my-0"><strong>Agri</strong>View</h2>
         </a>
       </div>
-      <div class="col-12 col-lg-5 col-md-5 my-auto py-1 py-lg-0">
-        <div class="row">
-          <nav class="navbar navbar-expand-md navbar-light w-100">
+      <div class="col-12 col-lg-4 col-md-6 my-auto py-1 py_lg-0">
+          <nav class="navbar navbar-expand-lg navbar-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#wide-nav"
               aria-controls="wide-nav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -66,9 +69,8 @@
             {% include 'includes/mobile-nav.html' %}
             {% include 'includes/wide-nav.html' %}
           </nav>
-        </div>
       </div>
-      <div class="col-10 col-lg-4 col-md-4 my-auto py-1 py-lg-0 d-none d-md-block d-lg-block d-xl-block ">
+      <div class="col-12 col-lg-4 col-md-6 my-auto py-1 py-lg-0 d-none d-md-block d-lg-block d-xl-block "> 
         <ul class="list-inline list-unstyled text-center text-lg-right my-0">
           <li class="list-inline-item dropdown">
             <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
@@ -81,11 +83,11 @@
             <div class="dropdown-menu border-0" aria-labelledby="user-options">
               {% if request.user.is_authenticated %}
                 <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                {% if request.user.is_superuser %}
-                  <a href="{% url 'management' %}" class="dropdown-item">Image Management</a>
-                  <a href="{% url 'image_management' %}" class="dropdown-item">Image Inventory</a>
-                {% endif %}
                 <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+                {% if request.user.is_superuser %}
+                  <a href="{% url 'management' %}" class="dropdown-item">Request Management</a>
+                  <a href="{% url 'image_management' %}" class="dropdown-item">Inventory Management</a>
+                {% endif %} 
               {% else %}
                 <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
                 <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
@@ -134,11 +136,10 @@
         </form>
       </div>
     </div>
-    <div id="delivery-banner" class="row text-center">
-      <div class="col bg-green text-white">
-          <h4 class="logo-font my-1">We plant a tree for every 20 images downloaded</h4>                
-      </div>            
-  </div>
+
+    <!--div class="row text-center justify-content-center">
+          <h4 class="logo-font my-4 bg_success text-green hidden-sm"><bold>We plant a tree for every 20 images downloaded</bold></h4>                   
+    </div-->              
   </header>
 
   {% if messages %}

@@ -24,9 +24,18 @@ def all_images(request):
             # Pipe provides OR i makes search case insensitive
             images = images.filter(queries)
 
+    if request.session.get('images', None):
+        images_dict = request.session['images']
+        #images_list = dict.values(images_dict)
+        image_select = True
+        del request.session['images']
+    else:    
+        image_select = False
+
     context = {
         'images': images,
-        'search_item': query
+        'search_item': query,
+        'image_select': image_select,
     }
 
     return render(request, 'images/images.html', context)
@@ -68,6 +77,11 @@ def image_info(request, image_id):
     """
     Collects images ids for display in the carousel
     """
+    #images = request.session.get('images', {})
+    #images[image_id] = image_id
+    request.session['images'] = image_id
+
+
 
     print("got here", image_id)
     image_details = get_object_or_404(Image, pk=image_id)

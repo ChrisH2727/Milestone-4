@@ -180,7 +180,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ............................Need to set USE_AWS..............................................
 
-if 'USE_AWS' in os.environ:
+if 'USE_AWSs' in os.environ:
     # Cache control
     print("Using AWS")
     AWS_S3_OBJECT_PARAMETERS = {

@@ -177,3 +177,45 @@ except position made sticky
     text-align: center;
     background-color: #f1f1f1;
   }*/
+
+
+/* Style the button and place it in the the image */
+.containerI .btn1 {
+    position: absolute;
+    top: 10%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color:red;
+    font-size: 24px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+
+  .containerI .btn2 {
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color:red;
+    font-size: 24px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+  
+  .containerI .btn3 {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color:red;
+    font-size: 24px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+
+  .container .btn:hover {
+    color:greenyellow;
+  }

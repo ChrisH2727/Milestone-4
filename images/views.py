@@ -25,12 +25,11 @@ def all_images(request):
             images = images.filter(queries)
 
     if request.session.get('images', None):
-        images_dict = request.session['images']
-        #images_list = dict.values(images_dict)
-        image_select = True
+        image_select = int(request.session.get('images', None))
         del request.session['images']
-    else:    
-        image_select = False
+
+    else:
+        image_select = None  
 
     context = {
         'images': images,
@@ -40,52 +39,27 @@ def all_images(request):
 
     return render(request, 'images/images.html', context)
 
-
-def carousel(request, image_id):
+def image_buy(request, image_id):
     """
-    Collects images ids for display in the carousel
-    """
-
-    images = request.session.get('images', {})
-    images[image_id] = image_id
-    request.session['images'] = images
-
-    redirect_url = request.POST.get('redirect_url')
-
-    return redirect(redirect_url)
-
-
-def carousel_run(request):
-    """
-    Find the selected images and runs the image carousel
+    Responds to the shopping trolly icon
+    and adds immage to the session variable
     """
 
-    images_dict = request.session['images']
-    images_list = dict.values(images_dict)
-    images_select = Image.objects.filter(pk__in=images_list)
-    download_paidfor = True
-
-    context = {
-        'images': images_select,
-        'download_paidfor': download_paidfor,
-    }
-
-    return render(request, 'images/carousel.html', context)
-
-
-def image_info(request, image_id):
-    """
-    Collects images ids for display in the carousel
-    """
-    #images = request.session.get('images', {})
-    #images[image_id] = image_id
     request.session['images'] = image_id
 
+    #image_details = get_object_or_404(Image, pk=int(image_id))
 
 
-    print("got here", image_id)
-    image_details = get_object_or_404(Image, pk=image_id)
-    print(image_details.size)
-    messages.error(request, f'Image file size: {image_details.name}')
+    return redirect(all_images)
+
+
+def image_info(request, image_ident):
+    """
+    Displays image details
+    """
+    
+    del request.session['images']
+    image_details = get_object_or_404(Image, pk=int(image_ident))
+    messages.error(request, f'Image: {image_details.name}' f'file size: {image_details.size}' )
 
     return redirect(all_images)

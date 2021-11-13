@@ -1,13 +1,1 @@
-/*-------------------------Image button control*/
-.image-btn {
-    color: black;
-    background-color: black;
-    padding: 12px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-  }
-  
-  .image-btn:hover {
-    color: Red;
-  }
+    

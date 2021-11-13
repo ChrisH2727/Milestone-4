@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.all_images, name='images'),
-    path('<image_id>', views.carousel, name='carousel'),
-    path('images/', views.carousel_run, name='carousel_run'),
-    path('images/<image_id>', views.image_info, name='image_info'),
+    path('images/<image_id>', views.image_buy, name='image_buy'),
+    path('images/<image_ident>', views.image_info, name='image_info'),
 ]

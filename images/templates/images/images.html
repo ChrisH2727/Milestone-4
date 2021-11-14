@@ -32,7 +32,7 @@
                 <div class="containerI">
                     {% if image.image %}
                         <!--Lightbox code sources: https://codesource.io/how-to-create-a-lightbox-using-bootstrap/-->
-                        <a  href="{{ image.image.url }}" data-toggle="lightbox" download>
+                        <a  href="{{ image.image.url }}" data-toggle="lightbox" >
                         <img class="img-thumbnail  thumb_im_adj" src="{{ image.image.url }}" class="img-fluid">
                         </a>
                     {% else %}

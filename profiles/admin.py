@@ -1,3 +1,19 @@
 from django.contrib import admin
+from .models import UserProfile, UserCredits
 
-# Register your models here.
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'mobile_phone_number',
+    )
+
+
+class UserCreditsAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'credits',
+        )
+
+admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserCredits, UserCreditsAdmin)

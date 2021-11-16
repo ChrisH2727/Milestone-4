@@ -23,80 +23,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+
+  <!--Materialiize style sheet-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+  type="text/css">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
   {% endblock %}
 
   {% block extra_css %}
   {% endblock %}
 
   {% block corejs %}
+
+  <!-- jquery & fontawesome-->
   <script src="https://kit.fontawesome.com/16b2d9be65.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
   </script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
+
+  <!-- Bootstrap-->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
+
+  <!-- Materialize-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
   <!-- Stripe -->
   <script src="https://js.stripe.com/v3/"></script>
 
+  <!-- ekko Lightbox-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
 
   {% endblock %}
 
   {% block extra_js %}
-  
   {% endblock %}
 
   <title>Agri Images {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
-  <header class="container-fluid fixed-top">
-    <div class="row bg-white">
-      <div class="col-12 col-lg-3 col-md-12 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a href="{% url 'home' %}" class="nav-link main-logo-link">
-          <h2 class="text-green my-0"><strong>Agri</strong>View</h2>
-        </a>
-      </div>
-      <div class="col-12 col-lg-4 col-md-6 my-auto py-1 py_lg-0">
-          <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#wide-nav"
-              aria-controls="wide-nav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            {% include 'includes/mobile-nav.html' %}
-            {% include 'includes/wide-nav.html' %}
-          </nav>
-      </div>
-      <div class="col-12 col-lg-4 col-md-6 my-auto py-1 py-lg-0 d-none d-md-block d-lg-block d-xl-block "> 
-        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-          <li class="list-inline-item dropdown">
-            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <div class="text-center">
-                <div><i class="fas fa-user fa-lg"></i></div>
-                <p class="my-0">My Account</p>
-              </div>
-            </a>
-            <div class="dropdown-menu border-0" aria-labelledby="user-options">
-              {% if request.user.is_authenticated %}
-                <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
-                <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
-                {% if request.user.is_superuser %}
-                  <a href="{% url 'management' %}" class="dropdown-item">Request Management</a>
-                  <a href="{% url 'image_management' %}" class="dropdown-item">Inventory Management</a>
-                {% endif %} 
-              {% else %}
-                <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
-                <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
-              {% endif %}
-            </div>
-          </li>
-        </ul>
-      </div>
+  <header>
+    <ul id="dropdown1" class="dropdown-content">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+        {% if request.user.is_superuser %}
+        <li class="divider"></li>
+          <a href="{% url 'management' %}" class="dropdown-item">Request Management</a>
+          <a href="{% url 'image_management' %}" class="dropdown-item">Inventory Management</a>
+        {% endif %} 
+      {% else %}
+        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+        <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+      {% endif %}
+    </ul>
+  <nav>
+    <div class="nav-wrapper">
+      <div class="row">
+        <div class="col s12 m12 l12">
+          <a href="{% url 'home' %}" class="brand-logo">
+            <h2 class="text-green my-0"><strong>Agri</strong>View</h2> 
+          </a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a class="dropdown-trigger" href="{% url 'images' %} data-target="dropdown2">Images</a>
+            <li><a href="{% url 'pricing' %}">Subscription Options</a>
+            <li><a href="{% url 'image_request' %}">Request an Image</a> 
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i <i class="fas fa-user"></i></a></li>
+          </ul>
+        </div>
+      </div>    
     </div>
+  </nav>
 
     <div class="row bg-white ">
       <div class="col-12 col-lg-12 my-auto py-3 py-lg-3 d-none d-md-block d-lg-block d-xl-block">
@@ -137,9 +140,9 @@
       </div>
     </div>
 
-    <!--div class="row text-center justify-content-center">
+    <div class="row text-center justify-content-center">
           <h4 class="logo-font my-4 bg_success text-green hidden-sm"><bold>We plant a tree for every 20 images downloaded</bold></h4>                   
-    </div-->              
+    </div>              
   </header>
 
   {% if messages %}
@@ -168,8 +171,12 @@
   
   {% block postloadjs %}
   <script type="text/javascript">
-    $('.toast').toast('show');
-  </script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+      $(".dropdown-trigger").dropdown();
+      $('.sidenav').sidenav();
+    }
+      </script>
   {% endblock %}
   
   </body>

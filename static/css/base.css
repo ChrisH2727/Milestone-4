@@ -78,15 +78,15 @@ body {
 }
 /* -------------------------------- Media Queries */
 
-/* Slightly larger container on xl screens
-@media (min-width: 800px) {
+/*Slightly larger container on xl screens*/
+@media (min-width: 992px) {
   .container {
-    padding-top: 100px;
+    padding-top: 164px;
   }
-}*/
+}
 
 /* fixed top navbar only on medium and up Taken from the Code Institute tutorial
-except position made sticky
+except position made sticky*/
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
         position: fixed;
@@ -95,11 +95,11 @@ except position made sticky
         left: 0;
         z-index: 1030;
     }
+  }
+.header-container {
+  padding-top: 200px;
+}
 
-    .header-container {
-        padding-top: 200px;
-    }
-}*/
 /*-------------------------Image presentation*/
 
 .thumb_im_adj {

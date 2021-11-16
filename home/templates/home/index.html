@@ -2,30 +2,21 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col-12">
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block content %}
-
-<div class="container " style="margin-top:200px;">
-    <div class="row text-center justify-content-center">
-        <h4 class="logo-font my-4 bg_success text-green hidden-sm"><bold>We plant a tree for every 20 images downloaded</bold></h4>                   
-    </div>  
-    <div class="row card-margin-top">
-        <div class="col-12 col-lg-6 col-md-6 col-sm-12">
-            <div class="card w-30 mx_auto">
-                <div class="card-body">
-                    <h5 class="card-title">Introductory Offer</h5>
-                    <p class="card-text">First 10 images free when you register </p>
-                    <a href="{% url 'account_signup' %}" class="btn btn-primary bg-success border border-success">Register</a>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-12 col-lg-6 offset-lg-1 col-md-6 col-sm-12" >
+      <div class="card white">
+        <div class="card-content black-text">
+          <span class="card-title">Introductory Offer</span>
+          <p class="card-text">First 10 images free when you register </p>
         </div>
+        <div class="card-action">
+            <a href="{% url 'account_signup' %}" class="btn btn-primary bg-success border border-success">Register</a>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}

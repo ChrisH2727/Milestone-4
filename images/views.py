@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.db.models import Q
 # Allows db queries to be ORed when the default is AND
 from .models import Image
-from profiles.models import UserCredits, UserImages
+# from profiles.models import UserImages
 
 # Code template from the Boutique Ado mini project tutorial
+
 
 def all_images(request):
     """
@@ -48,30 +49,33 @@ def image_buy(request, image_id):
     and adds immage to the session variable
     """
     # Confirm that the user has credits available
-    credits_available= get_object_or_404(UserCredits, user=request.user)
-
+    # credits_available = get_object_or_404(UserCredits, username=request.user)
+    print(request.user)
     # check if image previusly downloaded by user
-    image= get_object_or_404(Image, pk= image_id)
-    image_name = image.image
-    print(image_name)
-    #downloaded_images = UserImages.objects.filter(images_purchased =image.image)
-    
-    if not UserImages.objects.filter(images_purchased =image.image).exists():
-        # save downloaded image her
-        image_instance = UserImages.objects.create(images_purchased = image_name)
-        # image.images_purchased.save()
-        
-        if credits_available.credits > 0:
-            credits_available.credits -= 1
-            credits_available.save()
-            messages.success(request, f'You have: {credits_available.credits} credits remaining')
+    image = get_object_or_404(Image, pk= image_id)
 
-            request.session['images'] = image_id
-        else:
-            messages.error(request, f'You have: {credits_available.credits} credits remaining')
-            request.session['images'] = None
-    else:
-        messages.success(request, 'You already have this image ')
+    print("*********************************",image.image)
+    print("++++++++++++++++++++++++++++++++++++", request.user)
+
+    #if not UserImages.objects.filter(images_purchased=image.image).exists():
+        # save downloaded image her
+        # image_instance = UserImages(username=request.user, images_purchased=image.image)
+        #image_instance.save()
+
+        #if credits_available.credits > 0:
+        #    credits_available.credits -= 1
+        #    credits_available.save()
+        #    messages.success(request, f'You have: {credits_available.credits}\
+        #        credits remaining')
+
+        #    request.session['images'] = image_id
+        #else:
+        #    messages.error(
+        #        request, f'You have: {credits_available.credits}\
+        #            credits remaining')
+        #    request.session['images'] = None
+    #else:
+    #    messages.success(request, 'You already have this image ')
 
     return redirect(all_images)
 

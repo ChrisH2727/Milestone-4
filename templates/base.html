@@ -26,28 +26,19 @@
 
   <!--Materialiize style sheet-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-  type="text/css">
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    type="text/css">
   {% endblock %}
 
   {% block extra_css %}
   {% endblock %}
 
   {% block corejs %}
-
   <!-- jquery & fontawesome-->
   <script src="https://kit.fontawesome.com/16b2d9be65.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
 
-  <!-- Bootstrap-->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-  </script>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  
   <!-- Materialize-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
@@ -56,7 +47,6 @@
 
   <!-- ekko Lightbox-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
-
   {% endblock %}
 
   {% block extra_js %}
@@ -72,113 +62,101 @@
         <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
         <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
         {% if request.user.is_superuser %}
-        <li class="divider"></li>
+          <li class="divider"></li>
           <a href="{% url 'management' %}" class="dropdown-item">Request Management</a>
           <a href="{% url 'image_management' %}" class="dropdown-item">Inventory Management</a>
-        {% endif %} 
+        {% endif %}
       {% else %}
         <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
         <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
       {% endif %}
     </ul>
-  <nav>
-    <div class="nav-wrapper">
-      <div class="row">
-        <div class="col s12 m12 l12">
-          <a href="{% url 'home' %}" class="brand-logo">
-            <h2 class="text-green my-0"><strong>Agri</strong>View</h2> 
-          </a>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a class="dropdown-trigger" href="{% url 'images' %} data-target="dropdown2">Images</a>
-            <li><a href="{% url 'pricing' %}">Subscription Options</a>
-            <li><a href="{% url 'image_request' %}">Request an Image</a> 
-            <!-- Dropdown Trigger -->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i <i class="fas fa-user"></i></a></li>
-          </ul>
-        </div>
-      </div>    
-    </div>
-  </nav>
 
-    <div class="row bg-white ">
-      <div class="col-12 col-lg-12 my-auto py-3 py-lg-3 d-none d-md-block d-lg-block d-xl-block">
-        <form method="GET" action="{% url 'images' %}">
-          <div class="input-group w-100">
-            <div class="input-group-prepend">
-              <select class="form-select rounded-left border-black" aria-label="Select image category">
-                <option selected>Category</option>
-                <option value="1">All</option>
-                <option value="2">Top/Cane Fruit</option>
-                <option value="3">Combinable Crops</option>
-                <option value="4">Root Crops</option>
-                <option value="5">Livestock</option>
-                <option value="6">Protected Crops</option>
-                <option value="7">Vegetables</option>
-                <option value="8">Forage and Grass</option>
-                <option value="9">Industrial Crops</option>
-                <option value="10">Seeds</option>
-                <option value="11">Environmental Crops</option>
-                <option value="12">Commercial Flowers</option>
-                <option value="13">Misc.</option>
-                <option value="14">Ornamentals</option>
-                <option value="15">Herbs</option>
-                <option value="16">Salads</option> 
-              </select>
-            </div>
-            <input class="form-control border border-black rounded-0" type="text" name="q"
-              placeholder="Search our site">
-            <div class="input-group-append">
-              <button class="form-control btn btn-black border border-black rounded-right" type="submit">
-                <span class="icon">
-                  <i class="fas fa-search"></i>
-                </span>
-              </button>
-            </div>
+    <!-- mobile sidenav -->
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="{% url 'images' %}" >Images</a></li>
+      <li><a href="{% url 'pricing' %}">Subscription</a></li>
+      <li><a href="{% url 'image_request' %}">Contact us</a></li> 
+    </ul>
+
+    <nav class="nav-extended">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m3 l3">
+            <a href="{% url 'home' %}" class="brand-logo">
+              <h2 class="text-green my-0 show-on-large hide-on-med-and-down""><strong>Agri</strong>View</h2>
+              <h5 class="text-green my-0 show-on-small-only hide-on-med-and-up"><strong>Agri</strong>View</h2>
+            </a>
           </div>
-        </form>
+          <div class="col s11 m8 l8"> 
+            <a href='#' data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars icon-shift"></i></a>
+            <ul class="right hide-on-med-and-down">
+              <!-- Dropdown Trigger -->
+              <li><a href="{% url 'images' %}" >Images</a></li>
+              <li><a href="{% url 'pricing' %}">Subscription</a></li>
+              <li><a href="{% url 'image_request' %}">Contact us</a></li>
+            </ul>
+          </div>
+          <div class="col s1 m1 l1">
+            <ul class="right">
+              <!-- Dropdown Trigger -->
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i class="fas fa-user"></i></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
+
+    <!-- mobile sidenav -->
+    <ul class="sidenav sidenav-overlay " id="mobile-demo">
+      <li><a class="dropdown-trigger" href="{% url 'images' %}" data-target=" dropdown3">Images</a></li>
+      <li><a href="{% url 'pricing' %}">Subscription OptionsS</a></li>
+      <li><a href="{% url 'image_request' %}">Request an Image S></a></li>
+      <li></li>
+    </ul>
+
+
+
 
     <div class="row text-center justify-content-center">
-          <h4 class="logo-font my-4 bg_success text-green hidden-sm"><bold>We plant a tree for every 20 images downloaded</bold></h4>                   
-    </div>              
+      <h4 class="logo-font my-4 bg_success text-green hidden-sm">
+        <bold>We plant a tree for every 20 images downloaded</bold>
+      </h4>
+    </div>
   </header>
 
   {% if messages %}
-    <div class="message-container">
-      {% for message in messages %}
-        {% with message.level as level %}
-          {% if level == 40 %}
-            {% include 'includes/toasts/toast_error.html' %}
-          {% elif level == 30 %}
-            {% include 'includes/toasts/toast_warning.html' %}
-          {% elif level == 25 %}
-            {% include 'includes/toasts/toast_success.html' %}
-          {% else %}
-            {% include 'includes/toasts/toast_info.html' %}
-          {% endif %}
-        {% endwith %}
-      {% endfor %}
-    </div>
+  <div class="message-container">
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    {% include 'includes/toasts/toast_error.html' %}
+    {% elif level == 30 %}
+    {% include 'includes/toasts/toast_warning.html' %}
+    {% elif level == 25 %}
+    {% include 'includes/toasts/toast_success.html' %}
+    {% else %}
+    {% include 'includes/toasts/toast_info.html' %}
+    {% endif %}
+    {% endwith %}
+    {% endfor %}
+  </div>
   {% endif %}
 
-  {% block page_header %} 
-  {% endblock %} 
-  
-  {% block content %} 
-  {% endblock %} 
-  
+  {% block page_header %}
+  {% endblock %}
+
+  {% block content %}
+  {% endblock %}
+
   {% block postloadjs %}
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.toast').toast('show');
-      $(".dropdown-trigger").dropdown();
-      $('.sidenav').sidenav();
-    }
-      </script>
+    <script type="text/javascript"> $('.dropdown-trigger').dropdown();</script>
+    <script type="text/javascript"> $('.sidenav').sidenav(); </script>
+    <script type="text/javascript"> $('.toast').toast('show');</script>
   {% endblock %}
   
-  </body>
+  
+
+</body>
 
 </html>

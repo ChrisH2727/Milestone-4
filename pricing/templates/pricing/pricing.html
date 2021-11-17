@@ -2,16 +2,11 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
 {% endblock %}
 
 {% block content %}
 <div class="overlay"></div>
-<div class="container-fluid card-top">
+<div class="container">
     <div class="row">
         <div class="col text-center mt-3">
             <h2 class="logo-font">Subscription Options</h2>
@@ -19,33 +14,35 @@
         </div>
     </div>
     <div class="row">
-        {% for subscription in subscriptions %}
-        <div class="col col-sm-12 col-md-6 col-lg-3">
-            <div class="card">
-                    <h5 class="card-title">{{subscription.sub_display_name}}</h5>
+        
+            {% for subscription in subscriptions %}
+            <div class="col s12 m6 lg-3">
+            <div class="card small">
+                <div class="card-content black-text">
+                    <span class="card-title">{{subscription.sub_display_name}}</span>
                     <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
-                    <div class="row">
-                        <div class="col text-center">
-                            <p class="card-text"><strong>£{{subscription.sub_price}} inc. VAT</strong></p>
-                            <a href="{% url 'trolly_add' subscription.id %}"
-                                class="btn btn-primary bg-success border border-success">Add to basket</a>
-                        </div>
-                    </div>
+                    <p class="card-text"><strong>£{{subscription.sub_price}} inc. VAT</strong></p>
+                </div>
+                <div class="card-action">
+                    <a href="{% url 'trolly_add' subscription.id %}"
+                        class="btn btn-primary bg-success border border-success">Add to basket</a>
+                </div>
             </div>
         </div>
         {% endfor%}
     </div>
-    <div class"row">
-        <div class="col col-lg-6 offset-3">
-            <a href="{% url 'payment_request' %}"
-                class="btn btn-primary bg-success border border-success">Go to checkout</a>
-        </div>
-    </div>       
+</div>
+<div class"row">
+    <div class="col center-align">
+        <a href="{% url 'payment_request' %}" class="btn btn-primary bg-success border border-success">Go to
+            checkout</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'pricing/js/stripe_elements.js' %}"></script>
+{{ block.super }}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ client_secret|json_script:"id_client_secret" }}
+<script src="{% static 'pricing/js/stripe_elements.js' %}"></script>
 {% endblock %}

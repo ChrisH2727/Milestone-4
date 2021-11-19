@@ -1,12 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from .forms import UserProfileForm
-from pprint import pprint
-from django.contrib import messages
-# from .models import UserCredits
+#from django.contrib import messages
 
-
+@login_required
 def profile(request):
     """
     Display the user's profile. 
@@ -18,12 +17,10 @@ def profile(request):
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():   
             form.save()
-            messages.success(request, 'Profile updated successfully')
+            user_credits= get_object_or_404(UserProfile, user=request.user)
+            user_credits.credits = 10
+            user_credits.save()
 
-            #free_credits = UserCredits( credits=10)
-            #free_credits.save()
-        else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
     else:
         form = UserProfileForm(instance=profile)
     

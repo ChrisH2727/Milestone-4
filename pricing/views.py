@@ -100,6 +100,11 @@ def payment_request(request):
             if 'trolly' in request.session:
                 del request.session['trolly']
 
+            user_credits= get_object_or_404(UserProfile, user=request.user)
+            credits = get_object_or_404(Subscription, sku__in=trolly_values)
+            user_credits.credits = user_credits.credits + credits.sub_images
+            user_credits.save()
+
             return render(request, 'pricing/checkout_success.html')
 
         else:

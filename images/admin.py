@@ -5,6 +5,7 @@ from .models import Image, Category
 class ImageAdmin(admin.ModelAdmin):
     list_display = (
         'name',
+        'title',
         'category',
         'sku',
         'views',

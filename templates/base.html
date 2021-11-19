@@ -41,12 +41,14 @@
   
   <!-- Materialize-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script> function showToast(message, duration) {Materialize.toast(message, duration);}</script>
 
   <!-- Stripe -->
   <script src="https://js.stripe.com/v3/"></script>
-
-  <!-- ekko Lightbox-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+  
+  <!--Bootstrap
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script-->
   {% endblock %}
 
   {% block extra_js %}
@@ -126,7 +128,7 @@
   </header>
 
   {% if messages %}
-  <div class="message-container">
+  <!--div class="message-container">
     {% for message in messages %}
     {% with message.level as level %}
     {% if level == 40 %}
@@ -140,7 +142,7 @@
     {% endif %}
     {% endwith %}
     {% endfor %}
-  </div>
+  </div-->
   {% endif %}
 
   {% block page_header %}

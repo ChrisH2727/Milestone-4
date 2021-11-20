@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile_phone_number = models.CharField(max_length=20, null=True, blank=True)
     credits = models.PositiveIntegerField(null=True, blank=True)
+    is_registered = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username

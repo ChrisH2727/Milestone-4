@@ -120,6 +120,9 @@ body {
     height: 2px;
 }
 
+.toast-overide {
+  color: black!important;
+}
 
 /* Float four columns side by side
 .column {

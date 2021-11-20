@@ -7,15 +7,23 @@
 {% block content %}
 <div class="row">
     <div class="col-12 col-lg-6 offset-lg-1 col-md-6 col-sm-12" >
-      <div class="card white">
-        <div class="card-content black-text">
-          <span class="card-title">Introductory Offer</span>
-          <p class="card-text">First 10 images free when you register </p>
+      {% if request.user.is_authenticated %}
+        <div class="card white">
+          <div class="card-content black-text">
+            <span class="card-title">Welcome to AgriView</span>
+          </div>
         </div>
-        <div class="card-action">
-            <a href="{% url 'account_signup' %}" class="btn btn-primary bg-success border border-success">Register</a>
+      {%else %}
+        <div class="card white">
+          <div class="card-content black-text">
+            <span class="card-title">Introductory Offer</span>
+            <p class="card-text">First 10 images free when you register </p>
+          </div>
+          <div class="card-action">
+              <a href="{% url 'account_signup' %}" class="btn btn-primary bg-success border border-success">Register</a>
+          </div>
         </div>
-      </div>
+      {% endif%}
     </div>
   </div>
 </div>

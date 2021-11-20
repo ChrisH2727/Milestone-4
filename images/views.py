@@ -5,7 +5,6 @@ from django.db.models import Q
 from .models import Image
 from profiles.models import UserImages, UserProfile
 from django.contrib.auth.decorators import login_required
-
 # Code template from the Boutique Ado mini project tutorial
 
 
@@ -58,25 +57,21 @@ def image_buy(request, image_id):
         # save downloaded image here
         image_instance = UserImages(username=request.user, images_purchased=image_details.sku)
         image_instance.save()
-
+        
+        # Check that the user has sufficient credits available 
         if credits_available.credits > 0:
             credits_available.credits -= 1
             credits_available.save()
-    
+            messages.info(request, f'You have {credits_available.credits} available.')
+            
+            # increment image download counter 
+            image_details.downloads += 1
+            image_details.save()
+
+        else:
+            messages.error(request, 'You have no more credits remaining')
+
     request.session['images'] = image_id
 
     return redirect(all_images)
 
-
-def image_info(request, image_ident):
-    """
-    Displays image details
-    """
-
-    del request.session['images']
-    image_details = get_object_or_404(Image, pk=int(image_ident))
-    messages.error(
-        request, f'Image: {image_details.name}',
-        f'file size: {image_details.size}')
-
-    return redirect(all_images)

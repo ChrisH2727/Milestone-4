@@ -23,6 +23,8 @@ def profile(request):
                 user_credits.credits = 10
                 user_credits.save()
                 messages.success(request, 'Welcome to Agiview, we have awarded you 10 free credits')
+            profile.is_registered = True
+            form.save()
         else:
             messages.error(request, 'Profile updated unsuccessfull!')
     else:

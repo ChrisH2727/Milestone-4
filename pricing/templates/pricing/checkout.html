@@ -31,7 +31,9 @@
                 <fieldset class="rounded px-3 mb-5">
                         {{ order_form | crispy }}
                 </fieldset>
-                
+                <fieldset>
+                    <p>Your card will be charged: <strong>£ {{grand_total|floatformat:2}}</strong></p>    
+                </fieldset>
                 <fieldset class="rounded px-3 mb-5">                 
                     <div class="w-100 border-dark">
                         <p>Card Long Code*</p>

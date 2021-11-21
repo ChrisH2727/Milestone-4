@@ -7,10 +7,8 @@ from django.db.models import Sum
 from .forms import OrderForm
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
-# from .models import Order
 from django.conf import settings
 from django.contrib.auth.models import User
-# from profiles.models import UserProfile
 
 import stripe
 import json
@@ -60,7 +58,7 @@ def trolly_delete(request, subscription_id):
 
     messages.success(request, 'Subscripion deteleted from the trolly.')
 
-    return redirect(payment_request)
+    return redirect(showtrolly)
 
 
 @login_required
@@ -69,7 +67,7 @@ def showtrolly(request):
     Handles order summary
     """
     # show order summary only if the trolly has content
-    if request.session['trolly']:
+    if request.session.get('trolly',None):
         messages.success(request, 'show trolly content')
         
         trolly_dict = request.session['trolly']
@@ -86,15 +84,18 @@ def showtrolly(request):
             stripe_total = int(value)*100
             net_total = float(value)
     
-    
-    context = {
+        context = {
             'net_total': net_total,
             'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
             'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
             'sales_tax_rate':settings.SALES_TAX_RATE,
             'subscriptions': subscriptions_select,
             }
-    return render(request, 'pricing/showtrolly.html', context)
+        return render(request, 'pricing/showtrolly.html', context)
+    else:
+        messages.success(request, 'trolly is empty')
+    
+    return redirect(pricing)
 
 
 def payment_request(request):
@@ -107,7 +108,7 @@ def payment_request(request):
     # built to provide the required functionality for this application
 
     # checkout only if the trolly has content
-    if request.session['trolly']:
+    if request.session.get('trolly',None):
         messages.success(request, 'Processing payment request')
         
         trolly_dict = request.session['trolly']
@@ -171,8 +172,6 @@ def payment_request(request):
                 'order_total': net_total,
                 'grand_total': (
                     settings.SALES_TAX_RATE/100 * net_total) + net_total,
-                'sales_tax_rate':settings.SALES_TAX_RATE,
-                'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
                 })
             
             if not stripe_public_key:
@@ -181,9 +180,7 @@ def payment_request(request):
 
             context = {
                 'net_total': net_total,
-                'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
                 'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
-                'sales_tax_rate':settings.SALES_TAX_RATE,
                 'order_form': order_form,
                 'stripe_public_key': stripe_public_key,
                 'client_secret': intent.client_secret,

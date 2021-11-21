@@ -19,7 +19,6 @@
     <div class="row">
         <div class="col text-center mt-3">
             <h2 class="logo-font">Order Summary</h2>
-            <hr class="w-50 mb-1">
         </div>
     </div> 
 
@@ -40,7 +39,7 @@
                         <tr>
                             <td>{{subscription.sub_name}}</td>
                             <td>{{subscription.sub_display_name}}</td>
-                            <td>{{subscription.sub_price}}</td>
+                            <td>{{subscription.sub_price|floatformat:2}}</td>
                             <td>
                                 <a href ="{% url 'trolly_delete' subscription.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
                             </td>
@@ -49,27 +48,29 @@
                         <tr>
                             <td></td>
                             <td><strong>Net Total</strong></td>
-                            <td>£ {{net_total}}</td>
+                            <td>£ {{net_total|floatformat:2}}</td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><strong>VAT @ {{sales_tax_rate}}%</strong></td>
-                            <td>£ {{sales_tax}}</td>
+                            <td><strong>VAT @ {{sales_tax_rate|floatformat:2}}%</strong></td>
+                            <td>£ {{sales_tax|floatformat:2}}</td>
                         </tr>      
                         <tr>
                             <td></td>
                             <td><strong>Grand Total</strong></td>
-                            <td>£ {{grand_total}}</td>
+                            <td>£ {{grand_total|floatformat:2}}</td>
                         </tr>
                 </tbody>
             </table>
         </div>    
     </div>
 </div>
-<div class"row">
+<div class="row">
     <div class="col center-align">
         <a href="{% url 'payment_request' %}" class="btn btn-primary bg-success border border-success">Go to
             checkout</a>
+        <a href="{% url 'pricing' %}" class="btn btn-primary bg-success border border-success">Return to
+                Subscriptions</a>
     </div>
 </div>
 

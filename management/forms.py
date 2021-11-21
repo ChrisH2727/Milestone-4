@@ -15,5 +15,6 @@ class ResponseForm(forms.ModelForm):
             'request_email',
             'category',
             'description',
+            'site_owner_message',
             'image',
             )

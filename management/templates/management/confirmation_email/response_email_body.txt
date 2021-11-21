@@ -6,6 +6,7 @@ Description: {{ image_response.description }}
 Category: {{ image_response.category }}
 Image Number: {{ image_response.image }}
 
+{{ site_owner_message }}
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

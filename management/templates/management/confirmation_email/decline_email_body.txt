@@ -5,6 +5,7 @@ We have not been able to source the image that you requested.
 Description: {{ image_response.description }}
 Category: {{ image_response.category }}
 
+{{site_owner_message}}
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

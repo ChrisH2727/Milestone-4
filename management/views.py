@@ -11,6 +11,11 @@ def management(request):
     """
     Populates image response template
     """
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
+
     requests = RequestImage.objects.all()
 
     context = {
@@ -19,11 +24,15 @@ def management(request):
 
     return render(request, 'management/management.html', context)
 
-
+@login_required
 def edit_request(request, ask_id):
     """
     Edit the request for an image
     """
+
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
 
     if request.method == 'POST':
         response_form = ResponseForm(request.POST)
@@ -40,12 +49,14 @@ def edit_request(request, ask_id):
                 'request_email': response_form.cleaned_data['request_email'],
                 'description': response_form.cleaned_data['description'],
                 'category': response_form.cleaned_data['category'],
+                'site_owner_message': response_form.cleaned_data['site_owner_message'],
                 'image': response_form.cleaned_data['image']
             }
 
             # Update the request
             RequestImage.objects.filter(id=ask_id).update(
-                image=response_form.cleaned_data['image']
+                image=response_form.cleaned_data['image'],
+                site_owner_message=response_form.cleaned_data['site_owner_message'] 
                 )
             messages.success(request, 'Image request updated')
 
@@ -76,6 +87,10 @@ def delete_request(request, ask_id):
     Delete the request for an image
     """
 
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         response_form = ResponseForm(request.POST)
 
@@ -87,6 +102,7 @@ def delete_request(request, ask_id):
                 'request_name': response_form.cleaned_data['request_name'],
                 'request_email': response_form.cleaned_data['request_email'],
                 'description': response_form.cleaned_data['description'],
+                'site_owner_message': response_form.cleaned_data['site_owner_message'],
                 'category': response_form.cleaned_data['category']
             }
             delivered = False

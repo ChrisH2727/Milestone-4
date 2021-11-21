@@ -9,9 +9,9 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = RequestImage
-        fields = (
-            'request_name',
-            'request_email',
-            'category',
-            'description',
-            )
+        exclude = ('request_number',
+                    'request_date',
+                    'availability_date',
+                    'image',
+                    'site_owner_message',
+                    )

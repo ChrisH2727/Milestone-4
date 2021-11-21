@@ -18,57 +18,6 @@
 <div class="container">
     <div class="row">
         <div class="col text-center mt-3">
-            <h2 class="logo-font">Order Summary</h2>
-            <hr class="w-50 mb-1">
-        </div>
-    </div> 
-
-    <div class="row">
-        <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12">
-            <p>{{order_form.order_number}}</p>
-            <table class="table table-small">
-                <thead>
-                <tr>
-                    <th>SKU Code</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for subscription in subscriptions %}
-                        <tr>
-                            <td>{{subscription.sub_name}}</td>
-                            <td>{{subscription.sub_display_name}}</td>
-                            <td>{{subscription.sub_price}}</td>
-                            <td>
-                                <a href ="{% url 'trolly_delete' subscription.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                        <tr>
-                            <td></td>
-                            <td><strong>Net Total</strong></td>
-                            <td>£ {{net_total}}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><strong>VAT @ {{sales_tax_rate}}%</strong></td>
-                            <td>£ {{sales_tax}}</td>
-                        </tr>      
-                        <tr>
-                            <td></td>
-                            <td><strong>Grand Total</strong></td>
-                            <td>£ {{grand_total}}</td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>    
-    </div>  
-
-
-    <div class="row">
-        <div class="col text-center mt-3">
             <h2 class="logo-font">Checkout</h2>
             <hr class="w-50 mb-1">
         </div>

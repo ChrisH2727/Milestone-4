@@ -14,30 +14,30 @@
         </div>
     </div>
     <div class="row">
-        
-            {% for subscription in subscriptions %}
+        {% for subscription in subscriptions %}
             <div class="col s12 m6 lg-3">
-            <div class="card small">
-                <div class="card-content black-text">
-                    <span class="card-title">{{subscription.sub_display_name}}</span>
-                    <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
-                    <p class="card-text"><strong>£{{subscription.sub_price}} inc. VAT</strong></p>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'trolly_add' subscription.id %}"
-                        class="btn btn-primary bg-success border border-success"onclick="showToast('Hello World!', 3000)">Add to basket</a>  
+                <div class="card small">
+                    <div class="card-content black-text">
+                        <span class="card-title">{{subscription.sub_display_name}}</span>
+                        <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
+                        <p class="card-text"><strong>£{{subscription.sub_price}} inc. VAT</strong></p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'trolly_add' subscription.id %}"
+                            class="btn btn-primary bg-success border border-success">Add to trolly</a>  
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor%}
     </div>
 </div>
 <div class"row">
     <div class="col center-align">
-        <a href="{% url 'payment_request' %}" class="btn btn-primary bg-success border border-success">Go to
-            checkout</a>
+        <a href="{% url 'showtrolly' %}" class="btn btn-primary bg-success border border-success">Show trolly</a>
     </div>
 </div>
+
+<p>payment_request</p>
 {% endblock %}
 
 {% block postloadjs %}

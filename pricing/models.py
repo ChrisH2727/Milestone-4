@@ -4,7 +4,8 @@ from django.conf import settings
 from profiles.models import UserProfile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Pricing(models.Model):
     """
@@ -36,6 +37,13 @@ class Order(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     mobile_phone_number = models.CharField(max_length=20, null=False, blank=False)
+    company_name = models.CharField(max_length=120, null=True, blank=True)
+    address_line_1 = models.CharField(max_length=80, null=True, blank=True)
+    address_line_2 = models.CharField(max_length=80, null=True, blank=True)
+    town_or_city = models.CharField(max_length=40, null=True, blank=True)
+    county = models.CharField(max_length=80, null=True, blank=True)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
+    country = CountryField(blank_label='Country', null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     sales_tax_rate = models.DecimalField(max_digits=10, decimal_places=2, null=False, default= settings.SALES_TAX_RATE)

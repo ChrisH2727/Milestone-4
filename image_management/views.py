@@ -10,6 +10,12 @@ def image_management(request):
     """
     Populates image inventory management_template
     """
+
+     # Confirm superuser
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
+
     images = Image.objects.all()
 
     context = {
@@ -24,6 +30,12 @@ def image_management_add(request):
     """
     Populates image inventory management template
     """
+
+    # Confirm superuser
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
+
     add_image_form = ImageManagementForm()
     if request.method == 'POST':
         form = ImageManagementForm(request.POST or None)
@@ -49,11 +61,15 @@ def image_management_add(request):
 
     return render(request, 'image_management/add_image.html', context)
 
-
+@login_required
 def image_management_edit(request, ask_id):
     """
     Edit the request for an image
     """
+    # Confirm superuser
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
 
     if request.method == 'POST':
         response_form = ImageManagementForm(request.POST)
@@ -93,6 +109,10 @@ def image_management_delete(request, ask_id):
     """
     Delete the request for an image
     """
+    # Confirm superuser
+    if not request.user.is_superuser:
+        messages.error(request, 'Reserver for site operators.')
+        return redirect(reverse('home'))
 
     if request.method == 'POST':
         response_form = ImageManagementForm(request.POST)
@@ -121,4 +141,3 @@ def image_management_delete(request, ask_id):
         }
 
     return render(request, template, context)
-

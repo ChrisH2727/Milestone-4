@@ -113,7 +113,12 @@ def payment_request(request):
         if request.method == 'POST':
             form = OrderForm(request.POST)
             if form.is_valid():
-                order = form.save()
+                open_form = form.save(commit=False)
+                open_form.order_total = net_total
+                open_form.sales_tax_rate = settings.SALES_TAX_RATE
+                open_form.sales_tax = settings.SALES_TAX_RATE/100 * net_total
+                open_form.grand_total = (settings.SALES_TAX_RATE/100 * net_total) + net_total
+                open_form.save()
 
                 messages.success(request, 'Order sucessfully placed added product!')
 

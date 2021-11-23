@@ -2,7 +2,6 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from .models import Order
-from pprint import pprint
 from django.shortcuts import get_object_or_404
 
 

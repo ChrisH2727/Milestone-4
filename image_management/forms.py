@@ -13,11 +13,9 @@ class ImageManagementForm(forms.ModelForm):
         fields = (
             'category',
             'sku',
+            'title',
             'name',
             'size',
             'dimensions',
-            'price',
-            'views',
-            'downloads',
             'image',
             )

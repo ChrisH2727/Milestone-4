@@ -5,6 +5,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'order_number',
         'full_name',
+        'company_name',
         'email',
         'mobile_phone_number',
         'date',
@@ -27,6 +28,7 @@ class SubscriptionAdmin(admin.ModelAdmin):
         'sub_duration',
         'sub_images',
         'sub_price',
+        'sub_display_price',
     )
 
 

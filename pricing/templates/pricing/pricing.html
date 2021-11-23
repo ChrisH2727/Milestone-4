@@ -20,7 +20,7 @@
                     <div class="card-content black-text">
                         <span class="card-title">{{subscription.sub_display_name}}</span>
                         <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
-                        <p class="card-text"><strong>£{{subscription.sub_price}} inc. VAT</strong></p>
+                        <p class="card-text"><strong>£{{subscription.sub_display_price}} inc. VAT</strong></p>
                     </div>
                     <div class="card-action">
                         <a href="{% url 'trolly_add' subscription.id %}"

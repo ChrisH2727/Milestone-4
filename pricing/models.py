@@ -94,6 +94,7 @@ class Subscription(models.Model):
     sub_duration = models.PositiveIntegerField(null=True, blank=True)
     sub_images = models.PositiveIntegerField(null=True, blank=True)
     sub_price = models.DecimalField(max_digits=6, decimal_places=2)
+    sub_display_price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     def __str__(self):
         return self.sub_name

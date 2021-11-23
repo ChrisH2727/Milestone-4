@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from .email_handler import send_order_confirmation_email
 from .models import Order
+#from django.contrib import messages
 
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
@@ -20,27 +21,29 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.succeeded webhook from Stripe
         """
+
+        # messages.error(request, 'payment intent received')
+
         intent = event.data.object
         
         # Find orders that have been placed but no response email sent
         # and send confirmation email
         for order in Order.objects.all():
-            
             if not order.completed:
                 order_details = {
                     'full_name': order.full_name,
                     'email': order.email,
                     'order_number': order.order_number,
-                    'company_name': company_name,
-                    'address_line_1': address_line_1,
-                    'address_line_2': address_line_2,
-                    'town_or_city': town_or_city,
-                    'county': county,
-                    'date': date,
-                    'order_total': order_total,
-                    'sales_tax_rate': sales_tax_rate,
-                    'sales_tax': sales_tax,
-                    'grand_total': grand_total
+                    'company_name': order.company_name,
+                    'address_line_1': order.address_line_1,
+                    'address_line_2': order.address_line_2,
+                    'town_or_city': order.town_or_city,
+                    'county': order.county,
+                    'date': order.date,
+                    'order_total': order.order_total,
+                    'sales_tax_rate': order.sales_tax_rate,
+                    'sales_tax': order.sales_tax,
+                    'grand_total': order.grand_total
                     }
                 send_order_confirmation_email(order_details)
                 order.completed = True
@@ -55,7 +58,7 @@ class StripeWH_Handler:
         Handle the payment_intent.payment_failed webhook from Stripe
         """
         intent = event.data.object
-        
+        #messages.error(request, 'payment intent failed')
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)

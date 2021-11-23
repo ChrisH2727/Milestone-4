@@ -4,8 +4,20 @@ This is a confirmation of your order.
 
 Order Number: {{ order_response.order_number }}
 
+Order date: {{date}}
+
+Your billing address: 
+{{company_name}}
+{{address_line_1}}
+{{address_line_2}}
+{{town_or_city}}
+{{county}}
+{{country}}
 
 
+Order total:                {{order_total}}
+VAT @ {{sales_tax_rate}}%   {{sales_tax}}
+Charged to your card        {{grand_total}} 
 
 If you have any questions, feel free to contact us at {{ contact_email }}.
 

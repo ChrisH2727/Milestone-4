@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
-from .models import Subscription, Order
+from .models import Subscription, Order, Trolly
 from django.db.models import Sum
 from .forms import OrderForm
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from django.conf import settings
 from django.contrib.auth.models import User
+from pprint import pprint
 
 import stripe
 import json
@@ -37,10 +38,13 @@ def trolly_add(request, subscription_id):
     """
     subscription_details = get_object_or_404(Subscription, pk=subscription_id)
 
-    trolly_content = request.session.get('trolly', {})
-
-    trolly_content[subscription_id] = subscription_details.sku
-    request.session['trolly'] = trolly_content
+    Trolly.objects.update_or_create(
+        sku= subscription_details.sku,
+        price= subscription_details.sub_price,
+        sub_display_name= subscription_details.sub_display_name,
+        credits= subscription_details.sub_images,
+        sub_count =1
+        )
 
     return redirect(pricing)
 
@@ -50,11 +54,7 @@ def trolly_delete(request, subscription_id):
     Handles removal of item from the trolly
     """
     
-    trolly_content = request.session.get('trolly', {})
-
-    if subscription_id in trolly_content:
-        del trolly_content[subscription_id]
-        request.session["trolly_content"] = trolly_content
+    Trolly.objects.get(pk=subscription_id).delete()
 
     messages.success(request, 'Subscripion deteleted from the trolly.')
 
@@ -66,34 +66,24 @@ def showtrolly(request):
     """
     Handles order summary
     """
-    # show order summary only if the trolly has content
-    if request.session.get('trolly',None):
-        messages.success(request, 'show trolly content')
-        
-        trolly_dict = request.session['trolly']
-        trolly_values = dict.values(trolly_dict)
-        
-        # subscriptions to display in the order summary
-        subscriptions_select = Subscription.objects.filter(sku__in=trolly_values)
+    trolly_items = Trolly.objects.all()
+    if trolly_items:
+        messages.success(request, 'trolly has content')
 
-        # subscriptions to calculate total cost
-        subscriptions_total = Subscription.objects.filter(
-            sku__in=trolly_values).aggregate(Sum('sub_price'))
-
+        subscriptions_total = Trolly.objects.all().aggregate(Sum('price'))
         for key, value in subscriptions_total.items():
-            stripe_total = int(value)*100
             net_total = float(value)
-    
+
         context = {
             'net_total': net_total,
             'sales_tax': settings.SALES_TAX_RATE/100 * net_total,
             'grand_total': (settings.SALES_TAX_RATE/100 * net_total) + net_total,
             'sales_tax_rate':settings.SALES_TAX_RATE,
-            'subscriptions': subscriptions_select,
+            'trolly_items': trolly_items,
             }
         return render(request, 'pricing/showtrolly.html', context)
     else:
-        messages.success(request, 'trolly is empty')
+        messages.success(request, 'Your trolly is empty!')
     
     return redirect(pricing)
 
@@ -108,22 +98,14 @@ def payment_request(request):
     # built to provide the required functionality for this application
 
     # checkout only if the trolly has content
-    if request.session.get('trolly',None):
-        messages.success(request, 'Processing payment request')
-        
-        trolly_dict = request.session['trolly']
-        trolly_values = dict.values(trolly_dict)
-        
-        # subscriptions to display in the order summary
-        subscriptions_select = Subscription.objects.filter(sku__in=trolly_values)
+    trolly_items = Trolly.objects.all()
+    if trolly_items:
+        messages.success(request, 'trolly has content')
 
-        # subscriptions to calculate total cost
-        subscriptions_total = Subscription.objects.filter(
-            sku__in=trolly_values).aggregate(Sum('sub_price'))
-
+        subscriptions_total = Trolly.objects.all().aggregate(Sum('price'))
         for key, value in subscriptions_total.items():
-            stripe_total = int(value)*100
             net_total = float(value)
+            stripe_total = int(value)*100
 
         stripe_public_key = settings.STRIPE_PUBLIC_KEY
         stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -132,16 +114,23 @@ def payment_request(request):
             form = OrderForm(request.POST)
             if form.is_valid():
                 order = form.save()
-                
+
                 messages.success(request, 'Order sucessfully placed added product!')
 
-                if 'trolly' in request.session:
-                    del request.session['trolly']
+                # Sum all credits and allocate to the user signed in
+                credits_total = Trolly.objects.all().aggregate(Sum('credits'))
+                for values in credits_total.values():
+                    additional_credits = values
 
-                user_credits= get_object_or_404(UserProfile, user=request.user)
-                credits = get_object_or_404(Subscription, sku__in=trolly_values)
-                user_credits.credits = user_credits.credits + credits.sub_images
-                user_credits.save()
+                user = UserProfile.objects.get(user=request.user)
+                existing_credits =  user.credits
+
+                existing_credits = existing_credits + additional_credits
+                user.credits = existing_credits
+                user.save()
+
+                # Delete trolly contents
+                Trolly.objects.all().delete()
 
                 return render(request, 'pricing/checkout_success.html')
 
@@ -149,7 +138,6 @@ def payment_request(request):
                 messages.error(request, 'Failed to to place order')
 
         else:
-
             profile = UserProfile.objects.get(user=request.user)
             stripe.api_key = stripe_secret_key
 

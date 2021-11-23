@@ -65,8 +65,8 @@
         <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
         {% if request.user.is_superuser %}
           <li class="divider"></li>
-          <a href="{% url 'management' %}" class="dropdown-item">Request Management</a>
-          <a href="{% url 'image_management' %}" class="dropdown-item">Inventory Management</a>
+          <a href="{% url 'management' %}" class="dropdown-item" >Requests</a>
+          <a href="{% url 'image_management' %}" class="dropdown-item" >Inventory</a>
         {% endif %}
       {% else %}
         <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
@@ -154,8 +154,6 @@
     <script type="text/javascript"> $('.toast').toast('show');</script>
   {% endblock %}
   
-  
-
 </body>
 
 </html>

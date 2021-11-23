@@ -33,11 +33,8 @@ class SubscriptionAdmin(admin.ModelAdmin):
 class TrollyAdmin(admin.ModelAdmin):
     list_display = (
         'sku',
-        'name',
-        'dispaly_name',
-        'sub_display_name',
-        'sub_price',
-        'image',
+        'price',
+        'sub_count',
     )
 
 # Register Subscription model.
@@ -45,3 +42,6 @@ admin.site.register(Subscription, SubscriptionAdmin)
 
 # Register Order model.
 admin.site.register(Order, OrderAdmin)
+
+# Register Trolly model.
+admin.site.register(Trolly, TrollyAdmin)

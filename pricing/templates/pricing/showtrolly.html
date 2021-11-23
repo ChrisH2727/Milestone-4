@@ -35,13 +35,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for subscription in subscriptions %}
+                    {% for trolly_item in trolly_items %}
                         <tr>
-                            <td>{{subscription.sub_name}}</td>
-                            <td>{{subscription.sub_display_name}}</td>
-                            <td>{{subscription.sub_price|floatformat:2}}</td>
+                            <td>{{trolly_item.sku}}</td>
+                            <td>{{trolly_item.sub_display_name}}</td>
+                            <td>{{trolly_item.price|floatformat:2}}</td>
                             <td>
-                                <a href ="{% url 'trolly_delete' subscription.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
+                                <a href ="{% url 'trolly_delete' trolly_item.id %}" class= "btn btn-small btn-primary bg-danger border border-danger">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -11,7 +11,7 @@ def webhook(request):
     """
     Listen for webhooks from Stripe
     """
-    print("webhook response")
+
     # Built from Stripe code & Code Institute Boutique Ado tutorial
     # Initially stripped out to just the bare bones and then re-
     # built to provide the required functionality for this application

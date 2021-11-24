@@ -63,6 +63,10 @@ body {
     border: 1px solid black !important;
 }
 
+.btn-height {
+    height: 60px !important;
+}
+
 .card-top{
     padding-top: 12rem;
 }

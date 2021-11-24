@@ -41,9 +41,9 @@ def image_management_add(request):
         form = ImageManagementForm(request.POST or None)
         # save image request 
         if form.is_valid():
-
-            new_image = ImageManagementForm(form)
-            new_image.save()
+            #new_image = ImageManagementForm(form)
+            #new_image.save()
+            form.save()
 
             # display confirmation message 
             messages.success(request, 'Image detailes have been generated')
@@ -114,15 +114,16 @@ def image_management_delete(request, ask_id):
         messages.error(request, 'Reserver for site operators.')
         return redirect(reverse('home'))
 
+    form = ImageManagementForm()
     if request.method == 'POST':
         response_form = ImageManagementForm(request.POST)
 
         # delete image request 
         if response_form.is_valid():
-
             # delete the image request
-            image_request = get_object_or_404(Image, pk=ask_id)
-            image_request.delete()
+            print("*************************",ask_id)
+            Image.objects.filter(id__in=ask_id).delete()
+
             messages.success(request, 'Image request deleted')
 
             return redirect(management)

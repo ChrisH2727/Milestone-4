@@ -61,17 +61,16 @@ body {
 
 .border-black {
     border: 1px solid black !important;
+    height: 60px !important;
 }
 
 .btn-height {
-    height: 60px !important;
+    height: 62px !important;
 }
 
 .card-top{
     padding-top: 12rem;
 }
-
-
 
 .overlay {
 	height: 100%;
@@ -118,6 +117,7 @@ body {
 
 .custom-toast {
     overflow: visible;
+    padding: 0px!important;
 }
 
 .toast-capper {

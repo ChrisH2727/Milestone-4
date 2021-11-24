@@ -25,7 +25,7 @@
     </div>
     <div class="row">
         <div class="col col-lg-6 offset-lg-3 col-md-12 col-sm-12"> 
-            <form action="{% url 'image_management_edit' ask_id %}" method="POST" id="request-image">
+            <form action="{% url 'image_management_edit'ask_id %}" method="POST" id="request-image">
                 {% csrf_token %}
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label large text-black px-2 w-auto">Edit a Request</legend>

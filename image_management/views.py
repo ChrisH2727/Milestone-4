@@ -52,8 +52,7 @@ def image_management_add(request):
             # display confirmation message 
             messages.success(request, 'Failed to generate image details')
 
-        return render(request, 'image_management/image_management.html')
-
+        return redirect(image_management)
     else:
         context = {
             'add_image_form': add_image_form,
@@ -121,12 +120,10 @@ def image_management_delete(request, ask_id):
         # delete image request 
         if response_form.is_valid():
             # delete the image request
-            print("*************************",ask_id)
-            Image.objects.filter(id__in=ask_id).delete()
+            Image.objects.filter(id=ask_id).delete()
 
             messages.success(request, 'Image request deleted')
-
-            return redirect(management)
+            return redirect(image_management)
         else:
             messages.error(request, 'The image request has not been deleted.')
 
@@ -134,7 +131,7 @@ def image_management_delete(request, ask_id):
         request_for_image = get_object_or_404(Image, id=ask_id)
         form = ImageManagementForm(instance=request_for_image)
 
-    template = 'management/delete_request.html'
+    template = 'image_management/image_management_delete.html'
 
     context = {
         'form': form,

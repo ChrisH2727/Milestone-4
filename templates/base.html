@@ -21,8 +21,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css" >
+  <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css"-->
 
   <!--Materialiize style sheet-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
@@ -109,7 +109,7 @@
         <div class="col s1 m1 l1">
           <form method="GET" action="{% url 'images' %}">
             <div class="input-group w-100">
-                <input class="form-control border border-black rounded-left" type="text" name="q"
+                <input class="form-control border border-black rounded-left white" type="text" name="q"
                     placeholder="Search our site">
                 <div class="input-group-append">
                     <button class="form-control btn-small btn-height border border-black rounded-right" type="submit">

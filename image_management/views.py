@@ -41,8 +41,11 @@ def image_management_add(request):
         form = ImageManagementForm(request.POST or None)
         # save image request 
         if form.is_valid():
-            #new_image = ImageManagementForm(form)
-            #new_image.save()
+            # initialise unviewed fields
+            open_form = form.save(commit=False)
+            open_form.views = 0
+            open_form.downloads = 0
+            open_form.price = 1.00
             form.save()
 
             # display confirmation message 

@@ -22,8 +22,9 @@
             <div class="col-sm-6 col-md-6 col-lg-3">
                 <div class="containerI">
                     {% if image.image %}
-                        <img class="img-thumbnail  thumb_im_adj materialboxed" src="{% static image.image %}" class="img-fluid">
-                        </a>
+                        <img class="img-thumbnail  thumb_im_adj materialboxed tooltipped" 
+                        src="{% static image.image %}" class="img-fluid" data-position="right" 
+                        data-tooltip="File size: {{image.size}}<br>Dimension: {{image.dimensions}}">
                     {% else %}
                         <img class="img-thumbnail  thumb_im_adj" src="{% static image.noimage.png %}" alt="{{ image.name }}">
                     {% endif %}
@@ -40,6 +41,7 @@
 <script>
 $(document).ready(function(){
     $('.materialboxed').materialbox();
+    $('.tooltipped').tooltip();
   }); 
 </script>
 {% endblock %}

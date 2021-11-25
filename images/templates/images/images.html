@@ -23,10 +23,10 @@
                 <div class="containerI">
                     {% if image.image %}
                         <img class="img-thumbnail  thumb_im_adj materialboxed tooltipped" 
-                        src="{% static image.image %}" class="img-fluid" data-position="right" 
+                        src='{{image.image.url}}' class="img-fluid" data-position="right" 
                         data-tooltip="File size: {{image.size}}<br>Dimension: {{image.dimensions}}">
                     {% else %}
-                        <img class="img-thumbnail  thumb_im_adj" src="{% static image.noimage.png %}" alt="{{ image.name }}">
+                        <img class="img-thumbnail  thumb_im_adj" src="{{ image.noimage.png }}" alt="{{ image.name }}">
                     {% endif %}
                         <a href="{% url 'image_buy' image.id %}" class="btn1"><i class="fas fa-shopping-cart"></i></a>
                         <p>{{image.title}}</p>

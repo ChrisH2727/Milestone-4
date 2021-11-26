@@ -8,25 +8,27 @@ from django.contrib import messages
 @login_required
 def profile(request):
     """
-    Display the user's profile. 
+    Display the user's profile.
     """
 
-    profile= get_object_or_404(UserProfile, user=request.user)
+    profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():   
             form.save()
-            messages.success(request, 'Your profile updated successfully')
+            messages.success(request, 'Your profile has been updated.')
             if not profile.is_registered:
-                user_credits= get_object_or_404(UserProfile, user=request.user)
-                user_credits.credits = 10
-                user_credits.save()
-                messages.success(request, 'Welcome to Agiview, we have awarded you 10 free credits')
-            profile.is_registered = True
-            form.save()
+                profile.credits = 10
+                profile.is_registered = True
+                profile.trees = 0
+                profile.tree_count = 0
+                profile.save()
+                messages.success(request, 'Welcome to Agiview, \
+                    we have awarded you 10 free credits')
+
         else:
-            messages.error(request, 'Profile updated unsuccessfull!')
+            messages.error(request, 'Your profile has not been updated.')
     else:
         form = UserProfileForm(instance=profile)
     

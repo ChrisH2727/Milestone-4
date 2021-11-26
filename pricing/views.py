@@ -9,7 +9,6 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from django.conf import settings
 from django.contrib.auth.models import User
-from pprint import pprint
 
 import stripe
 import json

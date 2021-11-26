@@ -25,7 +25,9 @@ class UserProfile(models.Model):
     # phone_number = PhoneNumberField(unique = True, null = False, blank = False)
     # mobile_phone_number = PhoneNumberField(unique = True, null = False, blank = False)
     is_registered = models.BooleanField(default=False)
-
+    trees = models.PositiveIntegerField(null=True, blank=True, default=0)
+    tree_count = models.PositiveIntegerField(null=True, blank=True, default=0)
+    
     def __str__(self):
         return self.user.username
 

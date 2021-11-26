@@ -61,17 +61,25 @@ def image_buy(request, image_id):
         # Check that the user has sufficient credits available 
         if credits_available.credits > 0:
             credits_available.credits -= 1
+            
+            if credits_available.tree_count < 5:
+                credits_available.tree_count +=1
+            else:
+                credits_available.tree_count = 0
+                credits_available.trees +=1
+                messages.info(request, f'We have planted {credits_available.trees} for you.')
+
             credits_available.save()
             messages.info(request, f'You have {credits_available.credits} available.')
             
             # increment image download counter 
             image_details.downloads += 1
             image_details.save()
-
+            request.session['images'] = image_id
+        
         else:
             messages.error(request, 'You have no more credits remaining')
-
-    request.session['images'] = image_id
+            request.session['images'] = None
 
     return redirect(all_images)
 

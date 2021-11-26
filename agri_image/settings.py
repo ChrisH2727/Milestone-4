@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["agri-image.herokuapp.com", "localhost"]
 
@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL2' in os.environ:
+if 'DATABASE_URL' in os.environ:
     print("local")
     DATABASES = {
         'default': {
@@ -181,9 +181,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# ............................Need to set USE_AWS..............................................
+# ............................Need to set USE_AWS......
 
-if 'USE_AWS' in os.environ:
+if 'USE_AWSs' in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',

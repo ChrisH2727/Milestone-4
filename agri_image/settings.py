@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if 'DATABASE_URL2' in os.environ:
     print("local")
     DATABASES = {
         'default': {
@@ -171,7 +171,6 @@ USE_TZ = True
 # Constants
 SALES_TAX_RATE = 20
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -183,7 +182,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # ............................Need to set USE_AWS......
 
-if 'USE_AWSs' in os.environ:
+if 'USE_AWS' in os.environ:
     # Cache control
     AWS_S3_OBJECT_PARAMETERS = {
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',

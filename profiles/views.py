@@ -32,12 +32,14 @@ def profile(request):
     else:
         form = UserProfileForm(instance=profile)
     
-    user_credits= profile.credits
+    user_credits = profile.credits
+    trees_planted = profile.trees
 
     template = 'profiles/profile.html'
     context = {
         'form': form,
         'user_credits': user_credits,
+        'trees_planted': trees_planted,
     }
 
     return render(request, template, context)

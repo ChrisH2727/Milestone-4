@@ -7,4 +7,4 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', 'is_registered', 'credits',)
+        exclude = ('user', 'is_registered', 'credits', 'trees', 'tree_count',)

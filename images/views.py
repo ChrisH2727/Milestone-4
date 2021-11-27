@@ -37,11 +37,12 @@ def all_images(request):
         image_select = (request.session.get('images'))
         image_select = str(image_select)
         image_select = int(image_select)
+        print(type(image_select))
         messages.info(request, f'session variable {image_select} for you.')
         del request.session['images']
     else: 
         messages.info(request, 'no session variables available ')
-        image_select = 0
+        image_select = int(0)
 
     print("image_select", type(image_select))
     context = {

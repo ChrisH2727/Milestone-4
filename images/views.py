@@ -27,16 +27,9 @@ def all_images(request):
             # Pipe provides OR i makes search case insensitive
             images = images.filter(queries)
 
-    #if request.session.get('images', None):
-    #    image_select = int(request.session.get('images', None))
-    #    del request.session['images']
-    #else:
-    #    image_select = None
-
     if 'images' in request.session:
         image_select = (request.session.get('images'))
         image_select = str(image_select)
-        image_select = int(image_select)
         print(type(image_select))
         messages.info(request, f'session variable {image_select} for you.')
         del request.session['images']
@@ -48,7 +41,7 @@ def all_images(request):
     context = {
         'images': images,
         'search_item': query,
-        'image_select': image_select,
+        'image_select': int(image_select),
     }
 
     return render(request, 'images/images.html', context)
@@ -91,10 +84,10 @@ def image_buy(request, image_id):
         
         else:
             messages.error(request, 'You have no more credits remaining')
-            request.session['images'] = None
+            # request.session['images'] = None
     else:
         messages.info(request, 'You have have already purchased this image.')
-        request.session['images'] = None        
+        # request.session['images'] = None        
 
     return redirect(all_images)
 

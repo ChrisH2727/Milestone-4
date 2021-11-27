@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL2' in os.environ:
+if 'DATABASE_URL5' in os.environ:
     print("local")
     DATABASES = {
         'default': {

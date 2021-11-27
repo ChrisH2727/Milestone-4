@@ -26,13 +26,21 @@ def all_images(request):
                 dimensions__icontains=query)
             # Pipe provides OR i makes search case insensitive
             images = images.filter(queries)
-    
-    if request.session.get('images', None):
-        image_select = int(request.session.get('images', None))
-        del request.session['images']
 
-    else:
-        image_select = None
+    #if request.session.get('images', None):
+    #    image_select = int(request.session.get('images', None))
+    #    del request.session['images']
+    #else:
+    #    image_select = None
+
+    if 'images' in request.session:
+        image_select = int(request.session.get('images',None))
+
+        messages.info(request, f'session variable {image_select} for you.')
+        del request.session['images']
+    else: 
+        messages.info(request, 'no session variables available ')
+        image_select = 0
 
     context = {
         'images': images,

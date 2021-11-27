@@ -29,7 +29,7 @@
                         <img class="img-thumbnail  thumb_im_adj" src="{{ image.noimage.png }}" alt="{{ image.name }}">
                     {% endif %}
                         <a href="{% url 'image_buy' image.id %}" class="btn1"><i class="fas fa-shopping-cart"></i></a>
-                        <p>{{image.title}}</p>
+                        <p>{{image.title}} and {{image_select}}</p>
                     {% if image.id == image_select %}
                         <a  href="{{ image.image.url }}" download class="btn2"><i class="fas fa-download"></i></a>  
                     {% endif %}

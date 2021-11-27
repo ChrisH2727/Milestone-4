@@ -20,8 +20,6 @@ class UserProfile(models.Model):
     postcode = models.CharField(max_length=20, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
     credits = models.PositiveIntegerField(null=True, blank=True, default=0)
-    # phone_number = models.CharField(max_length=40, null=True, blank=True)
-    # mobile_phone_number = models.CharField(max_length=40, null=True, blank=True)
     phone_number = PhoneNumberField(unique=True, null=False, blank=False, default="")
     mobile_phone_number = PhoneNumberField(unique=True, null=False, blank=False, default="")
     is_registered = models.BooleanField(default=False)

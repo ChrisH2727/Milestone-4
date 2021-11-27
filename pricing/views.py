@@ -19,13 +19,18 @@ def pricing(request):
     Renders the subscription template and
     passes the subscription object through.
     """
-
+    # Delete trolly contents
+    Trolly.objects.all().delete()
+    
     subscriptions = Subscription.objects.all()
-
+    subscription_id =1
+    button_state = "add"        
     template = 'pricing/pricing.html'
 
     context = {
-            'subscriptions': subscriptions
+            'subscriptions': subscriptions,
+            'button_state': button_state,
+            'toggle_id': int(subscription_id),
         }
     return render(request, template, context)
 
@@ -35,17 +40,37 @@ def trolly_add(request, subscription_id):
     Adds the selected subscription option to the trolly
     calls for the payment form to be generated
     """
+    
+    # Delete trolly contents
+    Trolly.objects.all().delete()
+    button_state = "add"
+    
     subscription_details = get_object_or_404(Subscription, pk=subscription_id)
 
-    Trolly.objects.update_or_create(
-        sku= subscription_details.sku,
-        price= subscription_details.sub_price,
-        sub_display_name= subscription_details.sub_display_name,
-        credits= subscription_details.sub_images,
-        sub_count =1
-        )
+    # Toggle subscription in the trolly
+    if Trolly.objects.filter(sku= subscription_details.sku).exists():
+        Trolly.objects.filter(sku= subscription_details.sku).delete()
+        
+    else:
+        Trolly.objects.update_or_create(
+            sku= subscription_details.sku,
+            price= subscription_details.sub_price,
+            sub_display_name= subscription_details.sub_display_name,
+            credits= subscription_details.sub_images,
+            sub_count =1
+            )
+        button_state = "added"
 
-    return redirect(pricing)
+    subscriptions = Subscription.objects.all()
+
+    template = 'pricing/pricing.html'
+    context = {
+            'subscriptions': subscriptions,
+            'button_state': button_state,
+            'toggle_id': int(subscription_id),
+        }
+    return render(request, template, context)
+
 
 @login_required
 def trolly_delete(request, subscription_id):

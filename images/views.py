@@ -53,15 +53,16 @@ def image_buy(request, image_id):
     # check if image previusly downloaded by user
     image_details = get_object_or_404(Image, pk=image_id)
 
+    # confirm if the user has previously downloaded this image
     if not UserImages.objects.filter(images_purchased=image_details.sku).exists():
         # save downloaded image here
         image_instance = UserImages(username=request.user, images_purchased=image_details.sku)
         image_instance.save()
-        
+
         # Check that the user has sufficient credits available 
         if credits_available.credits > 0:
             credits_available.credits -= 1
-            
+
             if credits_available.tree_count < 5:
                 credits_available.tree_count +=1
             else:
@@ -80,6 +81,9 @@ def image_buy(request, image_id):
         else:
             messages.error(request, 'You have no more credits remaining')
             request.session['images'] = None
+    else:
+        messages.info(request, 'You have have already purchased this image.')
+        request.session['images'] = None        
 
     return redirect(all_images)
 

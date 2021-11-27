@@ -22,9 +22,16 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
                         <p class="card-text"><strong>£{{subscription.sub_display_price}} inc. VAT</strong></p>
                     </div>
+                    <p>{{button_state}} toggle id {{toggle_id}}  subscription id {{subscription.id}}</p>
                     <div class="card-action">
-                        <a href="{% url 'trolly_add' subscription.id %}"
-                            class="btn btn-primary bg-success border border-success">Add</a>  
+                            {% if button_state == "added" and subscription.id == toggle_id %}
+                                <a href="{% url 'trolly_add' subscription.id %}"    
+                                class="btn btn-primary green darken-1 border border-success btn" >Added</a>
+                            {% else %}
+                                <a href="{% url 'trolly_add' subscription.id %}"    
+                                class="btn btn-primary green lighten-3 border border-success btn" >Add</a>
+                            {% endif %}
+                        
                     </div>
                 </div>
             </div>
@@ -34,6 +41,7 @@
 <div class"row">
     <div class="col center-align">
         <a href="{% url 'showtrolly' %}" class="btn btn-large btn-primary bg-success border border-success">Show trolly</a>
+        <hr>
     </div>
 </div>
 

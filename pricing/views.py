@@ -92,8 +92,6 @@ def showtrolly(request):
     """
     trolly_items = Trolly.objects.all()
     if trolly_items:
-        messages.success(request, 'trolly has content')
-
         subscriptions_total = Trolly.objects.all().aggregate(Sum('price'))
         for key, value in subscriptions_total.items():
             net_total = float(value)
@@ -124,8 +122,6 @@ def payment_request(request):
     # checkout only if the trolly has content
     trolly_items = Trolly.objects.all()
     if trolly_items:
-        messages.success(request, 'trolly has content')
-
         subscriptions_total = Trolly.objects.all().aggregate(Sum('price'))
         for key, value in subscriptions_total.items():
             net_total = float(value)

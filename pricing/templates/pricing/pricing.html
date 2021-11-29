@@ -22,7 +22,6 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{subscription.sub_display_name}}</h6>
                         <p class="card-text"><strong>£{{subscription.sub_display_price}} inc. VAT</strong></p>
                     </div>
-                    <p>{{button_state}} toggle id {{toggle_id}}  subscription id {{subscription.id}}</p>
                     <div class="card-action">
                             {% if button_state == "added" and subscription.id == toggle_id %}
                                 <a href="{% url 'trolly_add' subscription.id %}"    

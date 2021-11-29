@@ -10,3 +10,4 @@ node_modules/
 *.pyc
 reset_migrations.py
 userprofile.json
+reset_migrations.py

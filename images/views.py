@@ -34,7 +34,6 @@ def all_images(request):
         messages.info(request, f'session variable {image_select} for you.')
         del request.session['images']
     else: 
-        messages.info(request, 'no session variables available ')
         image_select = int(0)
 
     print("image_select", type(image_select))
@@ -84,10 +83,9 @@ def image_buy(request, image_id):
         
         else:
             messages.error(request, 'You have no more credits remaining')
-            # request.session['images'] = None
+
     else:
-        messages.info(request, 'You have have already purchased this image.')
-        # request.session['images'] = None        
+        messages.info(request, 'You have have already purchased this image.')       
 
     return redirect(all_images)
 

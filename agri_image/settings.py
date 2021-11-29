@@ -17,18 +17,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["agri-image.herokuapp.com", "localhost"]
-
 
 # Application definition
 
@@ -86,14 +82,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                # required to keep list of images
-                # and/or subscriptions for purchase
-                'pricing.contexts.trolly_contents',
-
-                # required to keep list of images for display by the image
-                # carousel
-                'images.contexts.carousel_contents',
-
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -123,11 +111,9 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 WSGI_APPLICATION = 'agri_image.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL3' in os.environ:
+if 'DATABASE_URLs' in os.environ:
     print("local")
     DATABASES = {
         'default': {
@@ -157,7 +143,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -206,7 +191,6 @@ if 'USE_AWS' in os.environ:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
-
 # Stripe setup
 STRIPE_CURRENCY = 'GBP'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
@@ -215,7 +199,6 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 # This is neccessary for Django 3.2
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # Email setup
 if 'DEVELOPMENT' in os.environ:

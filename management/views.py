@@ -29,6 +29,8 @@ def edit_request(request, ask_id):
     """
     Edit the request for an image
     """
+    request_for_image = get_object_or_404(RequestImage, id=ask_id)
+    form = ResponseForm(instance=request_for_image)
 
     if not request.user.is_superuser:
         messages.error(request, 'Reserver for site operators.')
@@ -66,10 +68,6 @@ def edit_request(request, ask_id):
 
         else:
             messages.error(request, 'Please complete the form correctly')
-
-    else:
-        request_for_image = get_object_or_404(RequestImage, id=ask_id)
-        form = ResponseForm(instance=request_for_image)
     
     template = 'management/edit_request.html'
 
@@ -90,6 +88,9 @@ def delete_request(request, ask_id):
     if not request.user.is_superuser:
         messages.error(request, 'Reserver for site operators.')
         return redirect(reverse('home'))
+
+    request_for_image = get_object_or_404(RequestImage, id=ask_id)
+    form = ResponseForm(instance=request_for_image)
 
     if request.method == 'POST':
         response_form = ResponseForm(request.POST)
@@ -116,10 +117,6 @@ def delete_request(request, ask_id):
             return redirect(management)
         else:
             messages.error(request, 'The image request has not been deleted.')
-
-    else:
-        request_for_image = get_object_or_404(RequestImage, id=ask_id)
-        form = ResponseForm(instance=request_for_image)
 
     template = 'management/delete_request.html'
 

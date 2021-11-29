@@ -30,8 +30,6 @@ def all_images(request):
     if 'images' in request.session:
         image_select = (request.session.get('images'))
         image_select = str(image_select)
-        print(type(image_select))
-        messages.info(request, f'session variable {image_select} for you.')
         del request.session['images']
     else: 
         image_select = int(0)

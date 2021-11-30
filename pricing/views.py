@@ -217,6 +217,3 @@ def checkout_success(request):
     template = "pricing/checkout_success.html"
 
     return render(request, template)
-
-
-

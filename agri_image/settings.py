@@ -17,12 +17,15 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = 'DEVELOPMENT' in os.environ
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["agri-image.herokuapp.com", "localhost"]
 
@@ -82,6 +85,14 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
+                # required to keep list of images
+                # and/or subscriptions for purchase
+                #'pricing.contexts.trolly_contents',
+
+                # required to keep list of images for display by the image
+                # carousel
+                #'images.contexts.carousel_contents',
+
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
@@ -113,7 +124,7 @@ WSGI_APPLICATION = 'agri_image.wsgi.application'
 
 # Database
 
-if 'DATABASE_URLs' in os.environ:
+if 'DATABASE_URL2' in os.environ:
     print("local")
     DATABASES = {
         'default': {

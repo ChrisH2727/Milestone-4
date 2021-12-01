@@ -93,9 +93,111 @@ Offers over 6,500 high quality images on an agricultural theme.
 
 <span id="wireframes"></span>
 
-<h2>1.4 Wire Frames</h1>
+<h2>1.4 Wire Frames</h2>
 
-**TBD**
+<h3>Top Level Navigation</h3>
+
+At the launch of the application, the user is presented with the following screen. The Logo is always displayed and Clicking on it brings the user back to this home page.
+
+3 navigation options are provided 
+
+1. Images
+2. Subscriptions
+3. Contact us
+
+ The functionality assocaited with these options is provided furthere down.
+
+Clicking on the far right icon presents the user with the option of either logging in or registering with the service.
+
+![LandingPage](readmeimg/LandingPage.png)
+
+Prior to the user either registering or logging-in, clicking the profile icon (far right) exposes the navigation options
+
+1. log-in
+2. Register
+
+![LandingPage](readmeimg/Dropdown.png)
+
+Note also that for smaller screen sizes, the main navigation bar collapses into a "hamburger" icon.
+
+Clicking on either the login or the register options displays the native Allauth login or  register pages. These pages remain largely unchanged from their native counter parts.
+
+Once a user has logged in, the dropdown assocaited with the profile icon changes to allow the user either to view their profile page or to log out.  
+
+![Dropdownafter](readmeimg/Dropdownafter.png)
+
+For superusers, this dropdown includes two further items:
+
+1. An option to manage the image inventory
+2. An option to manage requests from customers for other images.
+
+![Dropdownafter2](readmeimg/Dropdownafter2.png)
+
+<h3>Image Selection and Download</h3>
+
+The available images may be accessed either via the search bar or by selecting the Images option. Note that the search bar is always available and for smaller screen widths just shrinks to fit the available width.
+
+Images are displayed as "thumbnails" in a matrix that adjusts to the screen size. 
+
+1. Hovering above an image displays further information about the image.
+
+2. Clicking on the image expands the image to occupy the center portion of the screen.
+
+3. Clicking on the shopping trolly checks that the customer is logged in and has available credits.
+
+4. If the user is logged in and has available credits, then a download icon appears in the thumb nail image. When this is clicked the image is downloaded.
+
+![DownloadImages](readmeimg/DownloadImages.png)
+
+<h3>Subscription Purchase</h3>
+
+Clicking on the subscriptions option brings up the following:
+
+![Subscription](readmeimg/Subscription.png)
+
+The buttons against each subscription option act like "radio" buttons so that only one is active at anyone time.
+
+Clicking on the order summary button takes the user to the order summary page.
+
+![OrderSummary](readmeimg/OrderSummary.png)
+
+From the order summary page the user is able to:
+
+1. Delete the subscription option selected and be returned to the subscriptions page
+
+2. Move on to the checkout page.
+
+The Checkout page requests the users to enter their billing details and credit card details.
+
+![PaymentForm](readmeimg/PaymentForm.png)
+
+Once the payment has been successfully processed, the user is informed.
+
+<h3>Contact Us</h3>
+
+The contact option provides the user with the oportunity to request further images.
+
+![ContactUs2](readmeimg/ContactUs2.png)
+
+Click the submit button brings up a message informing the user that they will receive a confirmation email.
+
+<h3>Superuser/Store Owner Functions</h3>
+
+As indicated above, with a superuser account, the user is able to access 2 additional features.
+
+<h4>Request Response</h4>
+
+The Request Response option permits the superuser to respond to a user's request for an image by email. The superuser may either respond with an email indicating that a new image has been added to the inventory or that the request has been deleted.
+
+![Contactus](readmeimg/Contactus.png)
+
+<h4>Inventory Management</h4>
+
+The Superuser is able to add,edit and delete images from the inventory.
+
+![ManageInventory](readmeimg/ManageInventory.png)
+
+![AddImage](readmeimg/AddImage.png)
 
 <span id="navigation-structure"></span>
 

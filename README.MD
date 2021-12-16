@@ -97,10 +97,15 @@ Each database table, together forming the project database architecture belongs 
 
 The diagrams below shows each database tables used, the category to which it belongs, the relationship to the app in which it is used and the relationship to any other database tables. 
 
+**1. User Account Management**
+![DownloadImages](readmeimg/user.png) 
 
-![DownloadImages](readmeimg/user.png) **User Account Management**
-![DownloadImages](readmeimg/purchasing.png) **Purchasing of Images**
-![DownloadImages](readmeimg/image_inventory.png) **Images Inventory Management including Customer Requests**
+**2. Purchasing of Images**
+![DownloadImages](readmeimg/purchasing.png) 
+
+**3. Images Inventory Management including Customer Requests**
+![DownloadImages](readmeimg/image_inventory.png) 
+
 
 <span id="wireframes"></span>
 

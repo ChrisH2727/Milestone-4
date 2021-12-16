@@ -17,7 +17,7 @@ Offers over 6,500 high quality images on an agricultural theme.
   - <a href="#ux-design">1.3 Design</a>
   - <a href="#info-architecture">1.4 Information architecture</a>
   - <a href="#wireframes">1.5 Wire Frames</a>
-   -<a href="#navigation-structure">1.6 Navigation Structure</a>
+   - <a href="#navigation-structure">1.6 Navigation Structure</a>
 - <a href="#features">2. Features</a>
   - <a href="#features-existing">2.1 Features Implemented</a>
   - <a href="#features-future">2.2 Features for future implementation</a>

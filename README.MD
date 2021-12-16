@@ -89,7 +89,18 @@ Offers over 6,500 high quality images on an agricultural theme.
 
 <h2>1.4 Information architecture</h1>
 
-**TBD**
+Each database table, together forming the project database architecture belongs to one of three categories:
+
+1. Database tables used to control user accounts
+2. Database tables used to control the image inventory including customer requests for new images to be featured by the web site
+3. Database tables used to purchase credits enabling images to be downloaded
+
+The diagrams below shows each database tables used, the category to which it belongs, the relationship to the app in which it is used and the relationship to any other database tables. 
+
+
+![DownloadImages](readmeimg/user.png) **User Account Management**
+![DownloadImages](readmeimg/purchasing.png) **Purchasing of Images**
+![DownloadImages](readmeimg/image_inventory.png) **Images Inventory Management including Customer Requests**
 
 <span id="wireframes"></span>
 

@@ -89,7 +89,7 @@ Offers over 6,500 high quality images on an agricultural theme.
 
 <h2>1.4 Information architecture</h1>
 
-Each database table, together forming the project database architecture belongs to one of three categories:
+This project incudes a number of database tables used to control and order information required to operate the site. Each table is categorised so as to support to one three key high level features.
 
 1. Database tables used to control user accounts
 2. Database tables used to control the image inventory including customer requests for new images to be featured by the web site
